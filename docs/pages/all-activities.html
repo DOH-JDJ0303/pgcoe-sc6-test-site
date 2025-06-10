@@ -1,0 +1,170 @@
+---
+title: All Activities
+layout: page
+nav_order: 3
+---
+
+<style>
+  #organismButtons button,
+  #activityButtons button {
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  #organismButtons button:hover,
+  #activityButtons button:hover {
+    background-color: #e8f3ff;
+    border-color: #007acc;
+    color: #007acc;
+  }
+
+  button.active {
+    background-color:rgb(204, 92, 0);
+    color:rgb(0, 0, 0);
+    border-color:rgb(0, 0, 0);
+    box-shadow: 0 0 0 3px rgb(204, 75, 0);
+  }
+
+#activities-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 8px;
+    overflow: auto;
+    margin-top: 1em;
+    background: #fff;
+  }
+
+  #activities-table thead {
+    background-color: #007acc;
+    color: rgb(8, 8, 8);
+  }
+
+  #activities-table thead th {
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 1em;
+    font-weight: 600;
+    border-bottom: 1px solid #ccc;
+  }
+
+  #activities-table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+
+  #activities-table tbody tr:hover {
+    background-color: #f1f8ff;
+  }
+
+  #activities-table tbody td {
+    padding: 12px 16px;
+    font-size: 0.95em;
+    color: #333;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  #activities-table tbody td a {
+    color: #007acc;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  #activities-table tbody td a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<!-- Organism Filter Buttons -->
+<div id="organismButtons" style="margin-bottom: 1.5em;">
+  <strong>Organism:<br></strong>
+  <button class="organism-filter" data-value="">all</button>
+  {% assign all_organisms = site.activities | map: "organism" | join: "," | split: "," | uniq | sort %}
+  {% for organism in all_organisms %}
+    <button class="organism-filter" data-value="{{ organism | strip }}">{{ organism | strip }}</button>
+  {% endfor %}
+</div>
+
+<!-- Activity Filter Buttons -->
+<div id="activityButtons" style="margin-bottom: 1.5em;">
+  <strong>Activity:<br></strong>
+  <button class="activity-filter" data-value="">all</button>
+  {% assign all_activities = site.activities | map: "activity" | join: "," | split: "," | uniq | sort %}
+  {% for activity in all_activities %}
+    <button class="activity-filter" data-value="{{ activity | strip }}">{{ activity | strip }}</button>
+  {% endfor %}
+</div>
+
+<table id="activities-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Organism</th>
+      <th>Activity</th>
+      <th>Tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for activity in site.activities %}
+    <tr>
+      <td><a href="{{ activity.url }}">{{ activity.title }}</a></td>
+      <td>{{ activity.organism | join: ", " }}</td>
+      <td>{{ activity.activity | join: ", " }}</td>
+      <td>{{ activity.tags | join: ", " }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<script>
+function escapeRegex(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+  $(document).ready(function () {
+    const table = $('#activities-table').DataTable({
+      pageLength: 10,
+      responsive: true
+    });
+
+    let currentOrganism = '';
+    let currentActivity = '';
+
+    function setActiveButton(group, value) {
+      $(`.${group}-filter`).removeClass('active');
+      $(`.${group}-filter[data-value="${value}"]`).addClass('active');
+    }
+
+    function filterTable() {
+      const orgRegex = currentOrganism ? `\\b${escapeRegex(currentOrganism)}\\b` : '';
+      const actRegex = currentActivity ? `\\b${escapeRegex(currentActivity)}\\b` : '';
+
+      table.column(1).search(orgRegex, true, false);
+      table.column(2).search(actRegex, true, false);
+      table.draw();
+    }
+
+    $('.organism-filter').on('click', function () {
+      currentOrganism = $(this).data('value');
+      setActiveButton('organism', currentOrganism);
+      filterTable();
+    });
+
+    $('.activity-filter').on('click', function () {
+      currentActivity = $(this).data('value');
+      setActiveButton('activity', currentActivity);
+      filterTable();
+    });
+  });
+</script>
