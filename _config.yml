@@ -10,3 +10,6 @@ aux_links:
 collections:
   activities:
     output: true
+  contributors:
+    output: true
+    permalink: /contributors/:slug/
