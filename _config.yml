@@ -8,8 +8,46 @@ aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
 
 collections:
-  activities:
+  workflow:
+    output: true
+    permalink: /workflow/:name/
+  module:
     output: true
   contributors:
     output: true
     permalink: /contributors/:slug/
+
+callouts:
+  tip:
+    title: Tip
+    color: green
+  warning:
+    title: Warning
+    color: yellow
+  important:
+    title: Important
+    color: red
+  info:
+    title: Info
+    color: blue
+  qc:
+    title: Quality Check
+    color: purple
+
+  purpose:
+    title: Purpose
+    color: charcoal
+    opacity: 0.1
+  limit:
+    title: Limitations
+    color: persiangreen
+    opacity: 0.1
+  data:
+    title: Data Requirements
+    color: saffron
+    opacity: 0.1
+
+  subtle:
+    color: subtle
+    opacity: 0.1
+    
