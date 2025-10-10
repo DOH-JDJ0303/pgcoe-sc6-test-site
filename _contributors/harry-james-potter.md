@@ -18,7 +18,7 @@ layout: minimal
 **Name:** {{ page.first_name }} {{ page.last_name }}<br>
 **Title:** {{ page.title }}<br>
 **Affliation:** {{ page.affiliation }}<br>
-**Email:** <a href="mailto:{{ page.email }}">{{ page.email }}</a><br>
+**Email:** <a href="mailto:{{ page.email }}"></a><br>
 **Bio:** {{ page.bio }}
 
 
