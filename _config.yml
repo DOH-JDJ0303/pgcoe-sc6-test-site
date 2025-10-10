@@ -5,7 +5,8 @@ theme: just-the-docs
 plugins:
   - jekyll-sitemap
 
-url: https://github.com/pgcoe
+url: https://doh-jdj0303.github.io
+baseurl: /pgcoe-sc6-test-site
 
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
