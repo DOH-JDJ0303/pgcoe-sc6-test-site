@@ -2,9 +2,6 @@ title: PGCoE SC6 Test Site
 description: Test site for PGCoE SC6
 theme: just-the-docs
 
-plugins:
-  - jekyll-sitemap
-
 url: https://doh-jdj0303.github.io
 baseurl: /pgcoe-sc6-test-site
 
