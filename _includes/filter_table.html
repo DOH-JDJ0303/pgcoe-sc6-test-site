@@ -114,7 +114,7 @@
   <tbody>
     {% for activity in site.workflow %}
     <tr>
-      <td><a href="{{ activity.url }}">{{ activity.title }}</a></td>
+      <td><a href="{{ activity.url | relative_url }}">{{ activity.title }}</a></td>
       <td>{{ activity.organism | join: ", " }}</td>
       <td>{{ activity.activity | join: ", " }}</td>
       <td>{{ activity.tags | join: ", " }}</td>
