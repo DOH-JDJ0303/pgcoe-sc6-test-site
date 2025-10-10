@@ -10,7 +10,7 @@ aux_links:
 collections:
   workflow:
     output: true
-    permalink: /workflow/:name/
+    permalink: /workflow/:path/
   module:
     output: true
   contributors:
