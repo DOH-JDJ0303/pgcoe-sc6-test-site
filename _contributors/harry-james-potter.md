@@ -10,7 +10,7 @@ avatar: https://upload.wikimedia.org/wikipedia/en/d/d7/Harry_Potter_character_po
 bio: >
   Harry James Potter is a senior epidemiologist specializing in the containment of magical zoonotic outbreaks. 
   After defeating He-Who-Must-Not-Be-Named, he turned his attention to pathogen surveillance in wizarding communities.
-layout: minimal
+layout: page
 ---
 
 <img src="{{ page.avatar }}" alt="{{ page.first_name }} {{ page.last_name }}" style="width: 300px; height: 300px; border-radius: 10%; object-fit: cover;">
