@@ -1,0 +1,50 @@
+organism:
+  - bacteria
+  - virus
+  - yeast
+
+sample_type:
+  - clinical
+  - zoonotic
+  - environmental
+  - wastewater
+
+transmission_route:
+  - respiratory
+  - fecal-oral
+  - bloodborne
+
+genome_features:
+  - segmented genome
+  - high mutation rate
+  - recombinant
+
+analysis_type:
+  - antimicrobial resistance
+  - virulence
+  - outbreak
+  - vaccine escape
+  - phylogenetic
+
+result_type:
+  - distance matrix
+  - heatmap
+  - phylogenetic tree
+  - bar plot
+  - relatedness network
+  - summary report
+  - microreact
+
+sequencing_platform:
+  - illumina
+  - nanopore
+  - pacbio
+  - sanger
+
+sequencing_method:
+  - whole genome
+  - targeted
+  - hybrid capture
+  - tiled amplicon
+  - metagenomic
+  - metabarcode
