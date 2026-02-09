@@ -8,7 +8,6 @@ A step-by-step guide to calculating and interpreting pairwise SNP distances from
 |---|---|
 | **Part of** | Tutorial 4: Are Cases Related to Each Other? |
 | **Pathogen** | H5N1 Influenza (HA segment) |
-| **Skill level** | Intermediate |
 | **Prerequisites** | Complete the [Preliminary Steps](link-to-preliminary-steps) to download the tutorial data |
 
 ---
@@ -198,24 +197,17 @@ head -5 snp_distances.tsv | column -t
 
 ### Reading the Matrix
 
-Open `snp_distances.tsv` and examine the pairwise distances. Here is an example of what a SNP distance matrix might look like for a set of H5N1 HA sequences from an outbreak investigation:
+Open `snp_distances.tsv` and examine the pairwise distances. Here is an example of a portion of what the SNP Distance matrix might look like... 
 
-| | Farm_A_01 | Farm_A_02 | Farm_B_01 | Farm_C_01 | Wild_Bird_01 | Context_OR |
-|---|---|---|---|---|---|---|
-| **Farm_A_01** | 0 | 1 | 2 | 3 | 8 | 22 |
-| **Farm_A_02** | 1 | 0 | 2 | 3 | 9 | 23 |
-| **Farm_B_01** | 2 | 2 | 0 | 3 | 7 | 21 |
-| **Farm_C_01** | 3 | 3 | 3 | 0 | 9 | 24 |
-| **Wild_Bird_01** | 8 | 9 | 7 | 9 | 0 | 18 |
-| **Context_OR** | 22 | 23 | 21 | 24 | 18 | 0 |
+
 
 **Interpreting this example:**
 
 The SNP distance matrix tells you how genetically similar or different your sequences are to each other. Each number represents the count of single nucleotide differences between a pair of sequences. Lower numbers mean more closely related sequences, and higher numbers mean more distantly related sequences.
 
-- **Low distances (0 to 3 SNPs):** Farm_A_01, Farm_A_02, Farm_B_01, and Farm_C_01 form a tight cluster with only 1 to 3 SNP differences, which is consistent with a linked outbreak.
-- **Moderate distance (7 to 9 SNPs):** Wild_Bird_01 is somewhat more distant from the farm cluster. This could represent a related but distinct introduction, or an earlier lineage. The SNP matrix alone *cannot distinguish these possibilities*.
-- **High distance (18 to 24 SNPs):** Context_OR (an Oregon contextual sequence) is clearly distinct from all outbreak sequences, representing an unrelated lineage.
+- **Low distances (0 to 3 SNPs):** 
+- **Moderate distance (7 to 9 SNPs):** 
+- **High distance (18 to 24 SNPs):** 
 
 ### Pathogen-Specific Thresholds
 
@@ -225,14 +217,6 @@ Published literature provides rough SNP thresholds for identifying potential out
 >
 > Thresholds depend heavily on the duration of the outbreak (longer outbreaks accumulate more mutations), the mutation rate and generation time of the pathogen, sequencing quality and coverage, and the specific genomic region analyzed. Always consult the relevant literature for your pathogen and context.
 
-| Pathogen | Suggested Threshold | Notes |
-|----------|-------------------|-------|
-| SARS-CoV-2 | 2 or fewer SNPs (whole genome) | Roughly 2 substitutions per month; adjust for outbreak duration |
-| Influenza A (HA) | 3 to 5 SNPs (segment) | Higher mutation rate; consider segment-specific rates |
-| *Salmonella* spp. | 5 to 10 SNPs (whole genome) | Varies by serovar; cgMLST may be preferred |
-| *E. coli* O157:H7 | 5 or fewer SNPs (whole genome) | Clonal outbreaks typically very tight |
-| Measles | 0 to 2 SNPs (N-450) | Genotyping region; limited diversity within genotypes |
-| *M. tuberculosis* | 5 to 12 SNPs (whole genome) | Slow mutation rate; recent transmission typically fewer than 5 |
 
 > **A note on bacterial pathogens:**
 >
