@@ -8,7 +8,7 @@ A step-by-step guide to calculating and interpreting pairwise SNP distances from
 |---|---|
 | **Part of** | Tutorial 4: Are Cases Related to Each Other? |
 | **Pathogen** | H5N1 Influenza (HA segment) |
-| **Prerequisites** | Complete the [Preliminary Steps](link-to-preliminary-steps) to download the tutorial data |
+| **Prerequisites** | Complete the [Preliminary Steps](https://github.com/DOH-JDJ0303/pgcoe-sc6-test-site/blob/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/tutorial4_preliminary_steps.md) to download the tutorial data |
 
 ---
 
