@@ -220,7 +220,7 @@ At this point you should have the following files in your working directory:
 
 From here, you can proceed to either analysis tutorial:
 
-- **[Analysis 1: SNP Distance Analysis](link-to-snp-tutorial)** for a rapid screen of pairwise genetic distances
+- **[Analysis 1: SNP Distance Analysis](https://github.com/DOH-JDJ0303/pgcoe-sc6-test-site/blob/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/tutorial4_snp_analysis.md)** for a rapid screen of pairwise genetic distances
 - **[Analysis 2: Phylogenetic Analysis](link-to-phylo-tutorial)** for evolutionary relationship inference
 
 We recommend starting with the SNP distance analysis and then moving to the phylogenetic analysis, as the two methods are complementary.
