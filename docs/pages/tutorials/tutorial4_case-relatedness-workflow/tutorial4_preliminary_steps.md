@@ -41,7 +41,7 @@ Before running any relatedness analysis, ask yourself three things:
 |---|---|---|---|
 | **Examples** | SARS-CoV-2, measles, West Nile virus, mpox | Influenza, rotavirus, Rift Valley fever virus | *Salmonella*, *E. coli*, *M. tuberculosis* |
 | **Typical analysis unit** | Whole genome | Individual segments or concatenated genome | Core genome or whole genome |
-| **Key confounder** | Recombination (some viruses) | **Reassortment** | Horizontal gene transfer (HGT), recombination |
+| **Special considerations** | | Reassortment | Horizontal gene transfer (HGT), recombination |
 
 > **Further reading:**
 > For more on reassortment analysis in segmented viruses, see [link TBD]. For bacterial-specific considerations including HGT and recombination masking, see resources on... *fill in resources here*
