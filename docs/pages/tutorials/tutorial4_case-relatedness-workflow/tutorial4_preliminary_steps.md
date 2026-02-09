@@ -44,7 +44,7 @@ Before running any relatedness analysis, ask yourself three things:
 | **Key confounder** | Recombination (some viruses) | **Reassortment** | Horizontal gene transfer (HGT), recombination |
 
 > **Further reading:**
-> For more on reassortment analysis in segmented viruses, see [companion tutorial, link TBD]. For bacterial-specific considerations including HGT and recombination masking, see resources on [Gubbins](https://sanger-pathogens.github.io/gubbins/) and [ClonalFrameML](https://github.com/xavierdidelot/ClonalFrameML).
+> For more on reassortment analysis in segmented viruses, see [link TBD]. For bacterial-specific considerations including HGT and recombination masking, see resources on... *fill in resources here*
 
 ### Where This Tutorial Fits
 
