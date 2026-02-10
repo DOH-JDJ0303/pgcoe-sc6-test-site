@@ -157,25 +157,13 @@ The count from `grep` should match the number of accessions in your accession li
 
 ### Verify Your Data
 
-Confirm that your accession list and downloaded sequences are consistent:
-
-```bash
-# Extract sequence headers from the FASTA file
-grep "^>" sequences_ha.fasta | head
-
-# Count sequences
-echo "Accessions in list: $(wc -l < accessions_ha.tsv)"
-echo "Sequences downloaded: $(grep -c '^>' sequences_ha.fasta)"
-```
-
 Check that the accessions in your FASTA headers match the accessions in your metadata file. Depending on how NCBI formats the headers, you may need to parse out the accession from the header line:
 
 ```bash
 # Extract accessions from FASTA headers (adjust parsing as needed)
-grep "^>" sequences_ha.fasta | sed 's/^>//' | cut -d' ' -f1 > downloaded_accessions.txt
 
 # Compare with your accession list
-diff <(sort accessions_ha.tsv) <(sort downloaded_accessions.txt)
+# use diff
 ```
 
 If `diff` produces no output, all accessions match. If there are differences, investigate any missing or extra sequences before proceeding.
@@ -186,11 +174,7 @@ Before moving on to the analysis, do a quick sanity check on sequence quality:
 
 ```bash
 # Check sequence lengths (all HA segments should be roughly similar in length)
-awk '/^>/{if(name)print name"\t"len; name=substr($0,2); len=0; next}
-     {len+=length($0)}
-     END{print name"\t"len}' sequences_ha.fasta | \
-  sort -t$'\t' -k2 -n | \
-  column -t
+
 ```
 
 **What to look for:**
