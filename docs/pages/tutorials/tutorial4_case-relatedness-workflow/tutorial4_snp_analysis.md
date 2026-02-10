@@ -103,17 +103,9 @@ This tutorial expects you to have completed the [Preliminary Steps](link-to-prel
 
 Before calculating SNP distances, all sequences must be aligned to a common coordinate system. We use [MAFFT](https://mafft.cbrc.jp/alignment/software/) for multiple sequence alignment, which works well for viral genomes.
 
-If you followed the [Preliminary Steps](link-to-preliminary-steps), you should already have all your sequences in a single file called `sequences_ha.fasta`. If you have outbreak and contextual sequences in separate files, combine them first:
+If you followed the [Preliminary Steps](link-to-preliminary-steps), you should already have all your sequences in a single file called `sequences_ha.fasta`. 
 
-```bash
-# Combine outbreak and contextual sequences into one file
-cat outbreak_sequences.fasta contextual_sequences.fasta > sequences_ha.fasta
-
-# Verify the number of sequences
-grep -c "^>" sequences_ha.fasta
-```
-
-Now run the alignment with MAFFT:
+Ru the alignment with MAFFT:
 
 ```bash
 # Align sequences with MAFFT
@@ -134,7 +126,7 @@ mafft \
 
 > **Alternative: Reference-based alignment**
 >
-> For outbreak investigations where you have a known reference, you may prefer a reference-based alignment. This ensures consistent coordinates across analyses and is especially useful when comparing results across different runs. You can do this with MAFFT using the `--addfragments` option or with tools like `minimap2` + `gofasta`. We cover reference-based alignment in more detail in the phylogenetic analysis tutorial.
+> For outbreak investigations where you have a known reference, you may prefer a reference-based alignment. This ensures consistent coordinates across analyses and is especially useful when comparing results across different runs. You can do this with MAFFT using the `--addfragments` option. We cover reference-based alignment in more detail in the phylogenetic analysis tutorial.
 
 ### Check Alignment Quality
 
@@ -173,7 +165,7 @@ With your aligned sequences ready, use [snp-dists](https://github.com/tseemann/s
 
 ```bash
 # Calculate pairwise SNP distances from the alignment
-snp-dists aligned_sequences.fasta > snp_distances.tsv
+snp-dists aligned_sequences.fasta > snp_distances.tsv # check the flags we might want
 
 # Preview the output
 head -5 snp_distances.tsv | column -t
@@ -199,7 +191,7 @@ head -5 snp_distances.tsv | column -t
 
 Open `snp_distances.tsv` and examine the pairwise distances. Here is an example of a portion of what the SNP Distance matrix might look like... 
 
-
+*Insert example of the snp_distances.tsv output that is constrained/maybe first 10 samples?* 
 
 **Interpreting this example:**
 
@@ -212,6 +204,7 @@ The SNP distance matrix tells you how genetically similar or different your sequ
 ### Pathogen-Specific Thresholds
 
 Published literature provides rough SNP thresholds for identifying potential outbreak clusters across different pathogens. These are guidelines, not hard cutoffs, and should always be interpreted in context.
+*Do we want to provide some example pathogen thresholds here or leave it open ended for folks to figure out what some appropriate thresholds are?* 
 
 > **Use thresholds with caution:**
 >
@@ -239,28 +232,8 @@ df = pd.read_csv("snp_distances.tsv", sep="\t", index_col=0)
 
 # Create a clustered heatmap
 # Clustering reorders rows and columns to group similar sequences
-g = sns.clustermap(
-    df,
-    cmap="YlOrRd",            # Yellow-Orange-Red color scale
-    annot=True,               # Show SNP counts in each cell
-    fmt="d",                  # Integer format
-    linewidths=0.5,           # Grid lines between cells
-    linecolor="white",
-    figsize=(10, 8),
-    annot_kws={"size": 9},
-    dendrogram_ratio=(0.12, 0.12),
-    cbar_kws={"label": "SNP Distance"},
-)
 
 # Format and save
-g.ax_heatmap.set_xlabel("")
-g.ax_heatmap.set_ylabel("")
-plt.title("Pairwise SNP Distance Matrix - H5N1 HA Segment", pad=80)
-plt.tight_layout()
-plt.savefig("snp_heatmap.png", dpi=300, bbox_inches="tight")
-plt.show()
-
-print("Heatmap saved to snp_heatmap.png")
 ```
 
 **What to look for in the heatmap:**
@@ -269,10 +242,6 @@ print("Heatmap saved to snp_heatmap.png")
 - **Color gradients**: the transition from light colors (low distance) to dark colors (high distance) reveals how sequences partition into groups.
 - **Dendrogram structure**: the hierarchical clustering dendrograms on the margins show which sequences group together. Note that this clustering is based on distance alone and is *not* a phylogenetic tree.
 - **Outliers**: rows or columns that are uniformly dark stand out as unrelated to the main cluster(s).
-
-> **Customization tips:**
->
-> For larger datasets (more than 50 sequences), consider turning off `annot=True` to remove the numeric labels and rely on color alone. You can also use `sns.heatmap()` instead of `sns.clustermap()` if you want to preserve the original sequence order from your metadata rather than applying hierarchical clustering.
 
 **Step 4 output file:**
 
