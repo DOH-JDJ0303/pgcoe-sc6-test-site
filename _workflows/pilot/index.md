@@ -3,14 +3,14 @@ title: Are cases related to each other?
 
 date: "2026-02-10"
 
-terms:
+category:
   organism:
     - bacteria
   application:
     - surveillance
     - outbreak investigation
 
-authors:
+author:
   - name: Pauline Trihn
     affiliation: Washington State Department of Health
     title: Molecular Epidemiologist

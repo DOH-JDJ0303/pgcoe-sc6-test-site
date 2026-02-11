@@ -1,7 +1,7 @@
 ---
 title: This is a test
 
-terms:
+category:
   organism:
     - virus
   application:
