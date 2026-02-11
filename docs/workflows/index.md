@@ -4,4 +4,4 @@ layout: page
 nav_order: 3
 ---
 
-{% include filter_table.html %}
+{% include search_table/index.html %}

@@ -1,0 +1,38 @@
+<!--Title-->
+# {{ page.title }}
+
+<!--Authors-->
+<!--Gather unique affiliations-->
+{% assign affiliations = "" | split: "" %}
+
+{% for author in page.authors %}
+  {% assign affiliations = affiliations | push: author.affiliation %}
+{% endfor %}
+
+{% assign affiliations = affiliations | uniq %}
+
+<!--Gather author names, assign affiliations, and display-->
+<p class="authors">
+{% for author in page.authors %}
+  {% if author.email %}
+    <a href="mailto:{{ author.email }}">{{ author.name }}</a>
+  {% else %}
+    {{ author.name }}
+  {% endif %}
+  <sup>
+    {% for affil in affiliations %}
+      {% if affil == author.affiliation %}
+        {{ forloop.index }}
+      {% endif %}
+    {% endfor %}
+  </sup>
+  {% unless forloop.last %}, {% endunless %}
+{% endfor %}
+</p>
+
+<!--Display affiliations-->
+<p class="affiliations">
+{% for affil in affiliations %}
+  <sup>{{ forloop.index }}</sup> {{ affil }}<br>
+{% endfor %}
+</p>
