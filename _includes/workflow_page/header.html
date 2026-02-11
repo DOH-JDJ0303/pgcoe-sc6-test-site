@@ -5,7 +5,7 @@
 <!--Gather unique affiliations-->
 {% assign affiliations = "" | split: "" %}
 
-{% for author in page.authors %}
+{% for author in page.author %}
   {% assign affiliations = affiliations | push: author.affiliation %}
 {% endfor %}
 
@@ -13,7 +13,7 @@
 
 <!--Gather author names, assign affiliations, and display-->
 <p class="authors">
-{% for author in page.authors %}
+{% for author in page.author %}
   {% if author.email %}
     <a href="mailto:{{ author.email }}">{{ author.name }}</a>
   {% else %}
