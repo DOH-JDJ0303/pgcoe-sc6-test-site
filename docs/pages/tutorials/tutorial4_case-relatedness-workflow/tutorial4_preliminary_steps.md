@@ -83,18 +83,18 @@ Two pre-made files are provided for this tutorial:
 
 2. **`metadata_ha.tsv`**: Metadata for each sequence, including collection date, location, host, and a column indicating whether each sequence is an **outbreak** sequence or a **contextual** background sequence.
 
-[⬇ Download `accessions_ha.tsv`](link-to-accessions-file)
+[⬇ Download `accessions_ha.tsv`](https://github.com/DOH-JDJ0303/pgcoe-sc6-test-site/blob/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/assets/accessions_ha.tsv)
 
-[⬇ Download `metadata_ha.tsv`](link-to-metadata-file)
+[⬇ Download `metadata_ha.tsv`](https://github.com/DOH-JDJ0303/pgcoe-sc6-test-site/blob/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/assets/metadata_ha.tsv)
 
 Place both files in your working directory for this tutorial:
 
 ```bash
 # Create a working directory
-mkdir -p tutorial4_snp_analysis
+mkdir tutorial4_snp_analysis
 cd tutorial4_snp_analysis
 
-# Move the downloaded files here (adjust path as needed)
+# Move the downloaded files here (adjust path as needed depending on where your you download the files)
 mv ~/Downloads/accessions_ha.tsv .
 mv ~/Downloads/metadata_ha.tsv .
 ```
@@ -102,7 +102,7 @@ mv ~/Downloads/metadata_ha.tsv .
 Preview the accession list:
 
 ```bash
-# Check the number of accessions and preview the first few
+# Check the number of accessions and preview the first few. There should be 638. 
 wc -l accessions_ha.tsv
 head accessions_ha.tsv
 ```
@@ -114,7 +114,7 @@ Preview the metadata:
 head metadata_ha.tsv | column -t -s $'\t'
 ```
 
-You should see columns including the accession, collection date, location, host, and a `sequence_category` column with values of either `outbreak` or `contextual`.
+You should see columns including the isolate_id, strain, host, date, segment, country, division, and whether the strain is an outbreak sequence (outbreak == yes) or contextual (outbreak == no). 
 
 ### Download Sequences from NCBI
 
@@ -153,27 +153,26 @@ The count from `grep` should match the number of accessions in your accession li
 
 > **Optional: NCBI-provided metadata**
 >
-> The zip archive also contains an NCBI-generated metadata file at `ha_download/ncbi_dataset/data/data_report.jsonl`. For this tutorial, we will use the curated `metadata_ha.tsv` file provided above, which includes the outbreak vs. contextual designation that NCBI metadata does not contain.
-
-### Verify Your Data
-
-Check that the accessions in your FASTA headers match the accessions in your metadata file. Depending on how NCBI formats the headers, you may need to parse out the accession from the header line:
-
-```bash
-# Extract accessions from FASTA headers (adjust parsing as needed)
-
-# Compare with your accession list
-# use diff
-```
-
-If `diff` produces no output, all accessions match. If there are differences, investigate any missing or extra sequences before proceeding.
+> The zip archive also contains an NCBI-generated metadata file at `ha_download/ncbi_dataset/data/data_report.jsonl`. For this tutorial, we will use the curated `metadata_ha.tsv` file provided above, which includes the outbreak designation that NCBI metadata does not contain.
 
 ### Quick Quality Check
 
-Before moving on to the analysis, do a quick sanity check on sequence quality:
+Before moving on to the analysis, do a quick sanity check on sequence quality. To get a summmary of the distribution of lengths we can run the following:
 
 ```bash
 # Check sequence lengths (all HA segments should be roughly similar in length)
+
+awk '/^>/ {if (name) print len; name=$0; len=0; next} {len+=length($0)} END {print len}' sequences_ha.fasta | sort -n | awk '
+{a[NR]=$1; s+=$1}
+END {
+    print "Min:    " a[1]
+    print "Q1:     " a[int(NR*0.25)]
+    print "Median: " a[int(NR*0.5)]
+    print "Q3:     " a[int(NR*0.75)]
+    print "Max:    " a[NR]
+    print "Mean:   " s/NR
+    print "N:      " NR
+}'
 
 ```
 
@@ -190,7 +189,7 @@ Before moving on to the analysis, do a quick sanity check on sequence quality:
 
 ## You're Ready
 
-At this point you should have the following files in your working directory:
+At this point you should have the necessary following files in your working directory:
 
 | File | Description |
 |------|-------------|
@@ -200,7 +199,7 @@ At this point you should have the following files in your working directory:
 
 > **Prefer to skip the download steps?** You can grab the input FASTA directly here:
 >
-> [⬇ Download `sequences_ha.fasta`](link-to-sequences-file)
+> [⬇ Download `sequences_ha.fasta`](https://github.com/DOH-JDJ0303/pgcoe-sc6-test-site/blob/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/assets/sequences_ha.fasta)
 
 From here, you can proceed to either analysis tutorial:
 
