@@ -1,10 +1,28 @@
 ---
-title: Example
+title: Are cases related to each other?
+
+date: "2026-02-10"
+
+category:
+  organism:
+    - bacteria
+  application:
+    - surveillance
+    - outbreak investigation
+
+author:
+  - name: Pauline Trihn
+    affiliation: Washington State Department of Health
+    title: Molecular Epidemiologist
+    email: coolbeans@gmail.com
+  - name: Kim Andrews
+    affiliation: University of Washington
+    title: Bioinformatician
+
 layout: page
-nav_order: 4
 ---
 
-# Tutorial 4: Are cases related to each other?
+{% include workflow_page/header.html %}
 
 ## Summary: 
 This tutorial provides a step-by-step explanation of how to analyze sequence relatedness for outbreak investigations using genomic data. The goal is to understand transmission chains and whether cases are part of a single outbreak or represent multiple independent introductions. 
@@ -71,6 +89,7 @@ The data includes:
 
 ---
 ## Step 0: Assess your organism (is this a segmented virus, is this bacteria) and your data type 
+- 12/9/2025 update: we will tentatively be using a data of D1.1 genotype H5N1 HA outbreak sequences from Washington state. 
 - what type of data do you have
     - what can that data tell you about your organism
 - How does this impact your assessment of relatedness between organisms 
@@ -93,6 +112,19 @@ Before analyzing sequences, verify sequence quality. (Do we need to consider a s
 
 ### Notes: potentially write this QC section at the end and hold off on it? Will need to separate QC sections for bacteria and one for viruses (and fungi???)
 ---
+#### Pseudologic Step 0.5: Downloading data from NCBI 
+1. Make sure that you have downloaded and installed NCBI Datasets (provide a link to how to download but the same code for how to check that NCBI Datasets is installed, check version in Terminal)
+2. Provide user with list of accession numbers for HA segment only TSV 
+    - filter down current accession list to only segment 4 accessions in TSV file (this will contain only accessions) and make this downloadable/available
+    - make metadata file identifying outbreak vs. contextual sequences available as a separate metadata file for HA sequences only
+    - 2 files in total will need to be linked/downloaded here
+4. Show folks how to use NCBI Datasets command to input the accession file to download the sequences and (optional) how to download the metadata file separately. For the purposes of the tutorial we'll use this cleaned metadata file (in step 2). 
+    - Output format for sequences: fasta file for the sequences 
+    - Output format for metadata: TSV
+5. Extract the fasta files from the subfolders to the working tutorial directory 
+    - Provide a link to the fasta file dataset
+    - Note: Stick with the full dataset for now instead of a subsampled dataset
+    - Kim to check if the metadata has QC steps
 
 ## Analysis 1: SNP Distance Analysis
 

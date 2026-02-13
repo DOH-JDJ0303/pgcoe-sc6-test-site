@@ -9,14 +9,9 @@ aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
 
 collections:
-  workflow:
+  workflows:
     output: true
-    permalink: /workflow/:path/
-  module:
-    output: true
-  contributors:
-    output: true
-    permalink: /contributors/:slug/
+    permalink: /workflows/:path/
 
 callouts:
   tip:

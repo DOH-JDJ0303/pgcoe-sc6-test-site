@@ -1,0 +1,15 @@
+{% for w in site.workflows %}
+  {% assign parts = w.path | split: "/" %}
+  {% assign idx = parts.size | minus: 2 %}
+  {% assign tag = parts[idx] %}
+  <script>updateArray("{{tag}}", "{{w.title}}", window.titleMap)</script>
+  <script>WfCategory = {}</script>
+  {% if w.category %}
+    {% for pair in w.category %}
+      {% for v in pair[1] %}
+  <script>updateArray("{{pair[0]}}", "{{v}}", WfCategory)</script>
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+  <script>updateArray("{{tag}}", WfCategory, window.categoryMap)</script>
+{% endfor %}
