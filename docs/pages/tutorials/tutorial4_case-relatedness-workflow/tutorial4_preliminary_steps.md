@@ -11,7 +11,7 @@ Before diving into any relatedness analysis, take a moment to think about the bi
 - [Step 0: Know Your Organism](#step-0-know-your-organism)
   - [Key Questions](#key-questions)
   - [How Organism Type Shapes Your Analysis](#how-organism-type-shapes-your-analysis)
-  - [Where This Tutorial Fits](#where-this-tutorial-fits)
+  - [Background on this Tutorial and its Data](#tutorial=background)
 - [Step 0.5: Download the Tutorial Data from NCBI](#step-05-download-the-tutorial-data-from-ncbi)
   - [Install NCBI Datasets CLI](#install-ncbi-datasets-cli)
   - [Download the Tutorial Files](#download-the-tutorial-files)
@@ -46,7 +46,7 @@ Before running any relatedness analysis, ask yourself three things:
 > **Further reading:**
 > For more on reassortment analysis in segmented viruses, see [link TBD]. For bacterial-specific considerations including HGT and recombination masking, see resources on... *fill in resources here*
 
-### Where This Tutorial Fits
+### Tutorial Background
 
 For this tutorial, we are working with **H5N1 avian influenza HA sequences (segment 4)** from a Washington State outbreak investigation. Influenza is a segmented virus with 8 genome segments, so our analysis reflects the evolutionary history of the HA segment only.
 
@@ -55,6 +55,9 @@ This is a valid and common approach. HA is the primary target for subtyping, ant
 - Sequences that appear closely related on HA may have different evolutionary histories on other segments due to reassortment.
 - A complete investigation would ideally analyze all 8 segments and check for reassortment events.
 - We focus on a single segment here for clarity and cover multi-segment approaches in a separate tutorial.
+
+### Data Curation 
+*Fill in with methods for data curation and information about the dataset here* 
 
 ---
 
