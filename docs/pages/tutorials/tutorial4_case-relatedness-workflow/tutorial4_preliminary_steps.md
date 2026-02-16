@@ -11,7 +11,8 @@ Before diving into any relatedness analysis, take a moment to think about the bi
 - [Step 0: Know Your Organism](#step-0-know-your-organism)
   - [Key Questions](#key-questions)
   - [How Organism Type Shapes Your Analysis](#how-organism-type-shapes-your-analysis)
-  - [Background on this Tutorial and its Data](#tutorial=background)
+  - [Tutorial Background](#tutorial-background)
+  - [Data Curation](#data-curation)
 - [Step 0.5: Download the Tutorial Data from NCBI](#step-05-download-the-tutorial-data-from-ncbi)
   - [Install NCBI Datasets CLI](#install-ncbi-datasets-cli)
   - [Download the Tutorial Files](#download-the-tutorial-files)
@@ -56,7 +57,7 @@ This is a valid and common approach. HA is the primary target for subtyping, ant
 - A complete investigation would ideally analyze all 8 segments and check for reassortment events.
 - We focus on a single segment here for clarity and cover multi-segment approaches in a separate tutorial.
 
-### Data Curation 
+## Data Curation 
 *Fill in with methods for data curation and information about the dataset here* 
 
 ---
