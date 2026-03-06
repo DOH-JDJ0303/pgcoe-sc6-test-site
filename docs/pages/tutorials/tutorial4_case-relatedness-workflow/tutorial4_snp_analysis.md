@@ -54,14 +54,13 @@ A pairwise SNP distance matrix quantifies the number of single nucleotide differ
 - **Rapid relatedness screening**: quickly identify which sequences are most similar
 - **Cluster detection**: groups of sequences with low pairwise distances suggest potential outbreak clusters
 - **Outlier identification**: sequences with high distances from a cluster may represent independent introductions
-- **Surveillance triage**: in large-scale surveillance, flag clusters that warrant deeper investigation
 
 ### What SNP Distances Don't Tell You
 
 While powerful for initial screening, SNP distances have some important blind spots:
 
 - **No ancestry information**: you can't tell which sequence came "first" or how they're related in evolutionary terms
-- **No directionality**: the matrix is symmetric and tells you nothing about transmission direction
+- **No directionality**: SNP distances tells you nothing about transmission direction
 - **No shared vs. unique mutations**: two sequences that are each 5 SNPs from a cluster may have completely different relationships to it (see [Limitations](#limitations-why-you-need-phylogenetic-analysis-too))
 - **No temporal signal**: distances don't account for when sequences were collected
 
@@ -84,7 +83,7 @@ Make sure you have the following tools installed before starting:
 
 ## Input Data
 
-This tutorial expects you to have completed the [Preliminary Steps](link-to-preliminary-steps), which walks you through downloading the data from NCBI. You should have the following files in your working directory:
+This tutorial expects you to have completed the [Preliminary Steps](https://github.com/DOH-JDJ0303/pgcoe-sc6-test-site/blob/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/tutorial4_preliminary_steps.md), which walks you through downloading the data from NCBI. You should have the following files in your working directory:
 
 | File | Description |
 |------|-------------|
@@ -93,9 +92,9 @@ This tutorial expects you to have completed the [Preliminary Steps](link-to-prel
 
 > **Want to jump straight in?** If you'd prefer to skip the download steps, you can grab the input files directly:
 >
-> [⬇ Download `sequences_ha.fasta`](link-to-sequences-file)
+> [⬇ Download `sequences_ha.fasta`]([link-to-sequences-file](https://raw.githubusercontent.com/DOH-JDJ0303/pgcoe-sc6-test-site/refs/heads/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/assets/sequences_ha.fasta))
 >
-> [⬇ Download `metadata_ha.tsv`](link-to-metadata-file)
+> [⬇ Download `metadata_ha.tsv`]([link-to-metadata-file](https://raw.githubusercontent.com/DOH-JDJ0303/pgcoe-sc6-test-site/refs/heads/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/assets/metadata_ha.tsv))
 
 ---
 
@@ -103,7 +102,7 @@ This tutorial expects you to have completed the [Preliminary Steps](link-to-prel
 
 Before calculating SNP distances, all sequences must be aligned to a common coordinate system. We use [MAFFT](https://mafft.cbrc.jp/alignment/software/) for multiple sequence alignment, which works well for viral genomes.
 
-If you followed the [Preliminary Steps](link-to-preliminary-steps), you should already have all your sequences in a single file called `sequences_ha.fasta`. 
+If you followed the [Preliminary Steps](https://github.com/DOH-JDJ0303/pgcoe-sc6-test-site/blob/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/tutorial4_preliminary_steps.md), you should already have all your sequences in a single file called `sequences_ha.fasta`. 
 
 Ru the alignment with MAFFT:
 
@@ -130,26 +129,16 @@ mafft \
 
 ### Check Alignment Quality
 
-Before proceeding, visually inspect your alignment in a viewer such as [AliView](https://ormbunkar.se/aliview/) or [Jalview](https://www.jalview.org/). Things to look for:
+Before proceeding, visually inspect your alignment in a viewer such as [NCBI Alignment Viewer](https://www.ncbi.nlm.nih.gov/projects/msaviewer/?appname=ncbi_multialign). Things to look for:
 
 - **Proper start/end alignment**: sequences should begin and end at consistent positions
 - **Large insertions or gaps**: unexpected large gap blocks may indicate assembly artifacts or sequences from a different subtype
-- **Excessive ambiguous bases (Ns)**: sequences with high N content will inflate SNP distances and should be flagged or removed
+- **Excessive ambiguous bases (Ns)**: sequences with high N content may signal a quality issue with your sequences which can pose an issue for phylogenetic tree building
 - **Sequence length consistency**: outlier lengths may indicate truncated or chimeric sequences
-
-A quick command-line check for sequence lengths and N content:
-
-```bash
-# Quick stats: sequence lengths and N counts
-awk '/^>/{if(name)print name, len, n_count; name=$0; len=0; n_count=0; next}
-     {len+=length($0); n_count+=gsub(/[Nn]/,"&",$0)}
-     END{print name, len, n_count}' aligned_sequences.fasta | \
-  column -t
-```
 
 > **Quality filtering:**
 >
-> Consider removing or flagging sequences with less than 95% genome coverage or an unusually high proportion of ambiguous bases. These can artificially inflate SNP distances and produce misleading results. NCBI submissions generally pass basic QC, but it is always worth checking.
+> Consider removing or flagging sequences with low genome coverage or an unusually high proportion of ambiguous bases. While SNP differences can be calculated for sites with unambiguous nucleotides, incomplete genomes can impact phylogenetic signal and accurate placement of the sequences in the tree. 
 
 **Step 1 output file:**
 
@@ -164,14 +153,15 @@ awk '/^>/{if(name)print name, len, n_count; name=$0; len=0; n_count=0; next}
 With your aligned sequences ready, use [snp-dists](https://github.com/tseemann/snp-dists) to generate a pairwise SNP distance matrix. This tool takes a multi-FASTA alignment and computes the number of nucleotide differences between every pair of sequences.
 
 ```bash
-# Calculate pairwise SNP distances from the alignment
-snp-dists aligned_sequences.fasta > snp_distances.tsv # check the flags we might want
+# Check the flags you might want to use
+snp-dists -h
 
-# Preview the output
-head -5 snp_distances.tsv | column -t
+# Calculate pairwise SNP distances from the alignment
+snp-dists aligned_sequences.fasta > snp_distances.tsv 
+
 ```
 
-`snp-dists` counts only differences at positions where both sequences have an unambiguous base call (A, T, G, or C). Positions where either sequence has an N or gap character are ignored, which prevents low-quality regions from inflating distances.
+`snp-dists` counts only differences at positions where both sequences have an unambiguous base call (A, T, G, or C). Positions where either sequence has an ambiguous character or gap character are ignored, which prevents low-quality regions from inflating distances. There are additional flags that are detailed [here](https://github.com/tseemann/snp-dists?tab=readme-ov-file#advanced-options) to control this behavior should you wish to consider positions where sequences have an ambiguous or gap character. 
 
 > **Output format:**
 >
