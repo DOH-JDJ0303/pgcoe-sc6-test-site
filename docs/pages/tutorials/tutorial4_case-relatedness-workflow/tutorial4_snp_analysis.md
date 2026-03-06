@@ -92,9 +92,9 @@ This tutorial expects you to have completed the [Preliminary Steps](https://gith
 
 > **Want to jump straight in?** If you'd prefer to skip the download steps, you can grab the input files directly:
 >
-> [⬇ Download `sequences_ha.fasta`](https://raw.githubusercontent.com/DOH-JDJ0303/pgcoe-sc6-test-site/refs/heads/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/assets/sequences_ha.fasta?raw1)
+> [⬇ Download `sequences_ha.fasta`](https://raw.githubusercontent.com/DOH-JDJ0303/pgcoe-sc6-test-site/refs/heads/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/assets/sequences_ha.fasta?raw=1)
 >
-> [⬇ Download `metadata_ha.tsv`](https://raw.githubusercontent.com/DOH-JDJ0303/pgcoe-sc6-test-site/refs/heads/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/assets/metadata_ha.tsv?raw1)
+> [⬇ Download `metadata_ha.tsv`](https://raw.githubusercontent.com/DOH-JDJ0303/pgcoe-sc6-test-site/refs/heads/main/docs/pages/tutorials/tutorial4_case-relatedness-workflow/assets/metadata_ha.tsv?raw=1)
 
 ---
 
