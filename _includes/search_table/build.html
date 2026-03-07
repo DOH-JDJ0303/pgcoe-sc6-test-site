@@ -1,8 +1,12 @@
 {% for w in site.workflows %}
+  {% unless w.url contains "/workflows/" and w.url contains "/index" %}
+    {% continue %}
+  {% endunless %}
   {% assign parts = w.path | split: "/" %}
   {% assign idx = parts.size | minus: 2 %}
   {% assign tag = parts[idx] %}
   <script>updateArray("{{tag}}", "{{w.title}}", window.titleMap)</script>
+  <script>updateArray("{{tag}}", "{{w.synopsis}}", window.synopsisMap)</script>
   <script>WfCategory = {}</script>
   {% if w.category %}
     {% for pair in w.category %}

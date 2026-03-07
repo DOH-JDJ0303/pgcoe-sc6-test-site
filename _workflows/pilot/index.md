@@ -19,342 +19,231 @@ author:
     affiliation: University of Washington
     title: Bioinformatician
 
+synopsis: "A step-by-step guide to calculating and interpreting pairwise SNP distances from genomic data to assess whether cases in an outbreak are related."
+
 layout: page
+back_to_top: true
 ---
 
 {% include workflow_page/header.html %}
 
-## Summary: 
-This tutorial provides a step-by-step explanation of how to analyze sequence relatedness for outbreak investigations using genomic data. The goal is to understand transmission chains and whether cases are part of a single outbreak or represent multiple independent introductions. 
-
-We will cover two complementary approaches: 
-1. SNP distance analysis
-2. Phylogenetic analysis 
-
-**Important**: These two methods provide different but complementary information. SNP distances tell you how many mutations differ between sequences. Phylogenetic trees tell you about shared ancestry and evolutionary relationships - information that SNP distances alone cannot reveal.
-
-## Table of Contents
-[Create table of contents linking to each section/subsection below. I think this can be formatted into the github page as a sidebar Table of Contents and not in the main document]
-
-### Prerequisites
-
-This tutorial assumes you have:
-- Basic familiarity with command-line tools
-- Understanding of sequence alignment and phylogenetics
-- Access to high-quality consensus sequences with metadata
-
-### Required Software
-
-To undertake this tutorial, you will need to download the following software packages:
-
-**Alignment tools**: 
-- [MAFFT](https://mafft.cbrc.jp/alignment/software/) - multiple sequence alignment
-- [snippy](https://github.com/tseemann/snippy) - for bacteria? 
-- 
-**For SNP distance analysis:**
-
-- [snp-dists](https://github.com/tseemann/snp-dists) - pairwise SNP distance calculator
-- Python 3.x with pandas and Xx packages
-- R 3.x with Xx packages 
-
-**For phylogenetic analysis:**
-
-- [IQ-TREE](http://www.iqtree.org/) - maximum likelihood phylogenetic inference
-- [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) - tree visualization
-
-**Alternative/supplementary tools:**
-- [Nextstrain](https://docs.nextstrain.org/en/latest/install.html) - phylogenetic visualization and analysis (optional but recommended)
-
-### Tutorial Data
-
-The example dataset consists of avian influenza h5n1 HA sequences from a mock outbreak investigation plus contextual background sequences.
-
-- For this tutorial: Add context on what it means to focus on a single segment and how there are additional complexities that would need to be addressed with multi-segment
-
-- Consider multi-segment analysis as a natural additional tutorial linked from this one
-    - Potential separate tutorial on reassortment analysis
-    - Concatenated whole genome tree? concatenated segment tree (not whole genome)? 
-    - 
-
-**[The tutorial dataset can be downloaded from here](link-to-data).**
-
-The data includes:
-- `outbreak_sequences.fasta` - h5n1 HA consensus sequences from outbreak cases
-- `contextual_sequences.fasta` - h5n1 HA contextual sequences from the region
-- `metadata.tsv` - collection dates, locations, and epidemiological information
-- `reference_genome.fasta` - h5n1 HA reference sequence for alignment (Goose Guangdong?)
-
-
-### Present an example outbreak scenario: 
-
----
-## Step 0: Assess your organism (is this a segmented virus, is this bacteria) and your data type 
-- 12/9/2025 update: we will tentatively be using a data of D1.1 genotype H5N1 HA outbreak sequences from Washington state. 
-- what type of data do you have
-    - what can that data tell you about your organism
-- How does this impact your assessment of relatedness between organisms 
-- Consider linking to resources on HGT and reassortment for bacteria and multi-segment trees. 
-
----
-## Step 0.5: Pulling the example outbreak data from NCBI
-- Pulling the sequences and metadata from NCBI for out outbreak data of interest
-- Checking the QC of this data 
-- NCBI QC metrics for what gets accepted into submission
-
-### Quality Control
-
-Before analyzing sequences, verify sequence quality. (Do we need to consider a separate tutorial or section on quality control?) 
-
-**Quality metrics to check:**
-- Genome coverage (aim for >95%)
-- Number of ambiguous bases (N's)
-- Average read depth (for consensus sequences from raw reads)
-
-### Notes: potentially write this QC section at the end and hold off on it? Will need to separate QC sections for bacteria and one for viruses (and fungi???)
----
-#### Pseudologic Step 0.5: Downloading data from NCBI 
-1. Make sure that you have downloaded and installed NCBI Datasets (provide a link to how to download but the same code for how to check that NCBI Datasets is installed, check version in Terminal)
-2. Provide user with list of accession numbers for HA segment only TSV 
-    - filter down current accession list to only segment 4 accessions in TSV file (this will contain only accessions) and make this downloadable/available
-    - make metadata file identifying outbreak vs. contextual sequences available as a separate metadata file for HA sequences only
-    - 2 files in total will need to be linked/downloaded here
-4. Show folks how to use NCBI Datasets command to input the accession file to download the sequences and (optional) how to download the metadata file separately. For the purposes of the tutorial we'll use this cleaned metadata file (in step 2). 
-    - Output format for sequences: fasta file for the sequences 
-    - Output format for metadata: TSV
-5. Extract the fasta files from the subfolders to the working tutorial directory 
-    - Provide a link to the fasta file dataset
-    - Note: Stick with the full dataset for now instead of a subsampled dataset
-    - Kim to check if the metadata has QC steps
-
-## Analysis 1: SNP Distance Analysis
-
-### Purpose and Scope
-
-SNP distance analysis provides a quick way to screen for closely related sequences that warrant further investigation. This approach is particularly useful for:
-- Initial rapid assessment during active outbreaks
-- Large-scale surveillance where you need to flag potential clusters
-- Situations where computational resources or time are limited
-
-### What SNP Distances Tell You
-
-**SNP Distance Matrices Show:**
-- How many mutations differ between any two sequences
-- Which sequences are most similar to each other
-- Clustering patterns when many sequences are similar
-- Quick screening for potential outbreak relationships
-
-**SNP Distance Matrices DO NOT Show:**
-- **Ancestry and evolutionary relationships** 
-- Directionality of transmission
-- Temporal relationships
-- Which mutations are shared vs. unique
-
-### Important Note
-
-**A sample Xx SNPs away from a cluster could be:**
-- An ancestor of that cluster (branched off before cluster formed)
-- A descendant of that cluster (evolved from within)
-- A sibling lineage (shares a common ancestor with cluster)
-
-**→ The SNP matrix cannot distinguish these scenarios! This is why phylogenetic trees are important for complete interpretation.**
-
-### Consider a placeholder caveat one-liner about what to do with bacteria? (at the start of this SNP analysis section)
-
 
 ---
 
-### Step 1: Align Sequences
+## Step 0. Getting started
+Follow [this](../appendix/preliminary_steps/) link to get started.
 
-**For viral genomes using MAFFT:**
+---
+
+## Step 1: Align Sequences
+
+Before calculating SNP distances, all sequences must be aligned to a common coordinate system. We use [MAFFT](https://mafft.cbrc.jp/alignment/software/) for multiple sequence alignment, which works well for viral genomes.
+
+If you followed the [Preliminary Steps](../appendix/preliminary_steps/), you should already have all your sequences in a single file called `sequences_ha.fasta`. 
+
+Ru the alignment with MAFFT:
 
 ```bash
-
-# Align sequences
-some code here
+# Align sequences with MAFFT
+mafft \
+  --auto \
+  --thread 4 \
+  --reorder \
+  sequences_ha.fasta > aligned_sequences.fasta
 ```
+
+### MAFFT Options Explained
+
+| Flag | Description |
+|------|-------------|
+| `--auto` | Automatically selects the best alignment strategy based on dataset size. For small datasets (fewer than 200 sequences), MAFFT uses the more accurate L-INS-i algorithm. For larger datasets it switches to faster heuristics. |
+| `--thread 4` | Use 4 CPU threads for parallel processing. Adjust based on your machine's available cores. |
+| `--reorder` | Reorder output sequences to group similar sequences together, which can make downstream visual inspection easier. |
+
+> **Alternative: Reference-based alignment**
+>
+> For outbreak investigations where you have a known reference, you may prefer a reference-based alignment. This ensures consistent coordinates across analyses and is especially useful when comparing results across different runs. You can do this with MAFFT using the `--addfragments` option. We cover reference-based alignment in more detail in the phylogenetic analysis tutorial.
+
+### Check Alignment Quality
+
+Before proceeding, visually inspect your alignment in a viewer such as [NCBI Alignment Viewer](https://www.ncbi.nlm.nih.gov/projects/msaviewer/?appname=ncbi_multialign). Things to look for:
+
+- **Proper start/end alignment**: sequences should begin and end at consistent positions
+- **Large insertions or gaps**: unexpected large gap blocks may indicate assembly artifacts or sequences from a different subtype
+- **Excessive ambiguous bases (Ns)**: sequences with high N content may signal a quality issue with your sequences which can pose an issue for phylogenetic tree building
+- **Sequence length consistency**: outlier lengths may indicate truncated or chimeric sequences
+
+> **Quality filtering:**
+>
+> Consider removing or flagging sequences with low genome coverage or an unusually high proportion of ambiguous bases. While SNP differences can be calculated for sites with unambiguous nucleotides, incomplete genomes can impact phylogenetic signal and accurate placement of the sequences in the tree. 
+
+**Step 1 output file:**
+
+> **Want to check your work or skip ahead?** Download the expected alignment output:
+>
+> [⬇ Download `aligned_sequences.fasta`](link-to-aligned-file)
 
 ---
 
-### Step 2: Calculate SNP Distances
+## Step 2: Calculate SNP Distances
+
+With your aligned sequences ready, use [snp-dists](https://github.com/tseemann/snp-dists) to generate a pairwise SNP distance matrix. This tool takes a multi-FASTA alignment and computes the number of nucleotide differences between every pair of sequences.
 
 ```bash
-# Calculate pairwise SNP distances
-snp-dists aligned_sequences.fasta > snp_distances.tsv
+# Check the flags you might want to use
+snp-dists -h
+
+# Calculate pairwise SNP distances from the alignment
+snp-dists aligned_sequences.fasta > snp_distances.tsv 
+
 ```
+
+`snp-dists` counts only differences at positions where both sequences have an unambiguous base call (A, T, G, or C). Positions where either sequence has an ambiguous character or gap character are ignored, which prevents low-quality regions from inflating distances. There are additional flags that are detailed [here](https://github.com/tseemann/snp-dists?tab=readme-ov-file#advanced-options) to control this behavior should you wish to consider positions where sequences have an ambiguous or gap character. 
+
+> **Output format:**
+>
+> The output is a tab-separated matrix where rows and columns are sequence names, and each cell contains the integer count of SNP differences between that pair. The diagonal is always 0 (a sequence compared to itself), and the matrix is symmetric.
+
+**Step 2 output file:**
+
+> **Want to check your work or skip ahead?** Download the expected SNP distance matrix:
+>
+> [⬇ Download `snp_distances.tsv`](link-to-snp-distances-file)
 
 ---
 
-### Step 3: Interpret SNP Distance Matrix
+## Step 3: Interpret the SNP Distance Matrix
 
-Open `snp_distances.tsv` and examine the pairwise distances.
+### Reading the Matrix
 
-**Example SNP distance matrix:**
+Open `snp_distances.tsv` and examine the pairwise distances. Here is an example of a portion of what the SNP Distance matrix might look like... 
 
-```
-put output here example
-```
+*Insert example of the snp_distances.tsv output that is constrained/maybe first 10 samples?* 
 
-**What the SNP matrix shows:**
-- provide interpretation here of our SNP matrix produced 
+**Interpreting this example:**
 
-SNP distance matrix tells you how genetically similar or different your sequences are to each other. Each number identifies how many single nucleotide differences there are between each pair of sequence. 
-- Lower numbers = more closely related 
-- Higher numbers = more distantly related. 
----
+The SNP distance matrix tells you how genetically similar or different your sequences are to each other. Each number represents the count of single nucleotide differences between a pair of sequences. Lower numbers mean more closely related sequences, and higher numbers mean more distantly related sequences.
 
-### Pathogen-Specific Thresholds for Identifying Potential Outbreak Clusters (Do we want a section like this?)
+- **Low distances (0 to 3 SNPs):** 
+- **Moderate distance (7 to 9 SNPs):** 
+- **High distance (18 to 24 SNPs):** 
 
-Use published thresholds appropriate for your pathogen:
+### Pathogen-Specific Thresholds
 
-**Bacterial pathogens:**
-- *Salmonella* spp.:
-- *E. coli* O157:H7: 
-- 
-**Viral pathogens:**
-- SARS-CoV-2: 
-- Influenza A: 
-- Measles: 
-- West Nile Virus:
+Published literature provides rough SNP thresholds for identifying potential outbreak clusters across different pathogens. These are guidelines, not hard cutoffs, and should always be interpreted in context.
+*Do we want to provide some example pathogen thresholds here or leave it open ended for folks to figure out what some appropriate thresholds are?* 
 
-**IMPORTANT:** These thresholds are guidelines. Always consider:
-- Duration of outbreak (longer = more SNPs expected)
-- Pathogen mutation rate and generation time
-- Published literature for specific pathogen
+> **Use thresholds with caution:**
+>
+> Thresholds depend heavily on the duration of the outbreak (longer outbreaks accumulate more mutations), the mutation rate and generation time of the pathogen, sequencing quality and coverage, and the specific genomic region analyzed. Always consult the relevant literature for your pathogen and context.
+
+
+> **A note on bacterial pathogens:**
+>
+> For bacterial pathogens, SNP analysis typically uses whole-genome alignments against a reference, often generated with tools like [Snippy](https://github.com/tseemann/snippy) rather than MAFFT. Bacterial genomes also present additional complexity from horizontal gene transfer (HGT) and recombination, which can confound SNP-based relatedness assessments. Consider masking recombinant regions with tools like [ClonalFrameML](https://github.com/xavierdidelot/ClonalFrameML) or [Gubbins](https://sanger-pathogens.github.io/gubbins/) before computing distances.
 
 ---
 
-### Step 4: Visualize SNP Distances Using Heatmaps
+## Step 4: Visualize SNP Distances with a Heatmap
 
-Create a heatmap to visualize clustering:
+A heatmap provides an intuitive visual summary of the distance matrix, making clusters and outliers immediately apparent. Use the following Python script to generate a publication-ready heatmap:
 
 ```python
-code here for create a heatmap
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Load the SNP distance matrix
+df = pd.read_csv("snp_distances.tsv", sep="\t", index_col=0)
+
+# Create a clustered heatmap
+# Clustering reorders rows and columns to group similar sequences
+
+# Format and save
 ```
+
+**What to look for in the heatmap:**
+
+- **Dark clusters along the diagonal**: groups of sequences with low pairwise distances, indicating potential outbreak clusters.
+- **Color gradients**: the transition from light colors (low distance) to dark colors (high distance) reveals how sequences partition into groups.
+- **Dendrogram structure**: the hierarchical clustering dendrograms on the margins show which sequences group together. Note that this clustering is based on distance alone and is *not* a phylogenetic tree.
+- **Outliers**: rows or columns that are uniformly dark stand out as unrelated to the main cluster(s).
+
+**Step 4 output file:**
+
+> **Want to see the expected result?** Download the heatmap:
+>
+> [⬇ Download `snp_heatmap.png`](link-to-heatmap-file)
 
 ---
 
-### Why consider a phylogenetic analysis in addition to a SNP analysis?
+## Limitations: Why You Need Phylogenetic Analysis Too
 
-**What the SNP matrix DOES NOT show:**
+The SNP distance matrix is a powerful screening tool, but it fundamentally cannot distinguish between different evolutionary scenarios that produce the same pairwise distances. Here is a concrete example.
 
-Is OutlierX related to the outbreak or not? The SNP distances alone cannot answer this.
+Suppose you have four tightly clustered outbreak sequences (1 to 3 SNPs apart) and one outlier sequence, "Wild_Bird_01", that is 8 SNPs from the cluster. The distance matrix tells you it is 8 SNPs away, but it cannot tell you *why*.
 
-**Scenario A - OutlierX is an outgroup :**
+**Scenario A: Wild_Bird_01 is an outgroup (separate introduction)**
+
 ```
-      ┌─ OutlierX (10 SNPs away, branched BEFORE cluster)
-──────┤
-      └─┬─ Sample1
-        ├─ Sample2  
-        ├─ Sample3
-        └─ Sample4 (longer chain)
-```
-**Interpretation:** OutlierX is a separate introduction. The four samples are one outbreak.
-
-**Scenario B - OutlierX descended from cluster:**
-```
-      ┌─ Sample1
-──────┼─ Sample2
-      ├─ Sample3
-      ├─ Sample4
-      └─ OutlierX (10 SNPs, but EVOLVED FROM cluster)
+         ┌─── Wild_Bird_01  (8 SNPs away, branched BEFORE the cluster)
+─────────┤
+         └──┬── Farm_A_01
+            ├── Farm_A_02
+            ├── Farm_B_01
+            └── Farm_C_01
 ```
 
-**→ The SNP matrix will show identical information for both scenarios. You need phylogenetic trees to distinguish them.**
+**Interpretation:** Wild_Bird_01 represents a separate introduction. The four farm sequences form a single outbreak cluster with a common ancestor distinct from Wild_Bird_01.
+
+**Scenario B: Wild_Bird_01 descended from the cluster**
+
+```
+         ┌── Farm_A_01
+─────────┼── Farm_A_02
+         ├── Farm_B_01
+         ├── Farm_C_01
+         └───── Wild_Bird_01  (8 SNPs, EVOLVED FROM within the cluster)
+```
+
+**Interpretation:** Wild_Bird_01 is actually part of the outbreak. It evolved from within the cluster and accumulated additional mutations, perhaps through sustained transmission in a wild bird population.
+
+> **Critical limitation:**
+>
+> The SNP distance matrix produces **identical numbers** for both scenarios above. Only a phylogenetic tree, which reconstructs shared ancestry and evolutionary relationships, can distinguish them. This is why the phylogenetic analysis in the next tutorial is essential for complete outbreak interpretation.
 
 ---
 
-## Analysis 2: Phylogenetic Analysis 
-[Do we want this workflow example to be Nextstrain based or not use Nextstrain?]
+## Summary
 
-### Purpose and Scope
+In this tutorial, you learned how to:
 
-Phylogenetic trees provide information that SNP distances alone cannot:
-- **Evolutionary relationships** beyond simple pairwise distances
-- **Shared ancestry** which sequences evolved from common ancestors
-- **Temporal context** when sequences have different collection dates
-- **Directionality** of transmission (with time-resolved trees)
-- **Statistical support** for relationships (bootstrap values)
-- **Broader geographic context** by including background sequences (may identify introductions from other geographic regions more easily)
+1. **Align sequences** using MAFFT and assess alignment quality
+2. **Calculate pairwise SNP distances** with snp-dists
+3. **Interpret the distance matrix** using pathogen-appropriate thresholds
+4. **Visualize clusters** with a heatmap to identify potential outbreak relationships
 
----
-### Step 1: Select Background Sequences (and Reference?)
-
-[Include how to pull the contextual and reference data from NCBI here]
-
-**Why background sequences matter:**
-
-Including contextual sequences helps determine:
-- Whether your outbreak sequences form a **monophyletic clade** (suggesting single introduction)
-- How your sequences relate to broader pathogen diversity
-- Geographic or temporal origin of the introduction
-
-**Example selection strategy:**
-
-```
-Aim for 20-100 background sequences based on:
-- Geographic proximity (same state/region)
-- Temporal proximity (within relevant timeframe)
-- Genetic similarity 
-
-Balance considerations:
-- Size of outbreak (larger outbreaks need more backgrounds)
-- Diversity of pathogen (high diversity needs more backgrounds)
-- Computational resources (more sequences = longer runtime)
-```
-
-**Reference Selection**
-(talk about choosing a high quality reference sequence for alignment and consistency across phylogenetic trees?)
+SNP distance analysis is an excellent first pass for outbreak investigations. It is fast, interpretable, and effective at identifying clusters of related sequences. However, distances alone cannot reveal evolutionary relationships or distinguish key epidemiological scenarios. Always follow up with phylogenetic analysis for a complete picture.
 
 ---
 
-### Step 2: Sequence Alignment using Reference 
+## All Tutorial Files
 
+Here is a summary of all input, intermediate, and output files from this tutorial. You can download any of these to check your work or jump into the analysis at any step.
 
-```bash
-# Combine outbreak, background, and reference sequences
-cat outbreak_sequences.fasta background_sequences.fasta reference_genome.fasta > combined_sequences.fasta
-
-# Align with MAFFT
-
-# Options explained: 
-
-
-```
-
-**Check alignment quality:**
-- View in alignment viewer (Aliview, Jalview, or similar)
-- Look for proper start/end alignment
-- Check for large blocks of gaps that might be unusual
+| File | Step | Type | Download |
+|------|------|------|----------|
+| `sequences_ha.fasta` | Input | Unaligned HA sequences | [⬇ Download](link-to-sequences-file) |
+| `metadata_ha.tsv` | Input | Sequence metadata | [⬇ Download](link-to-metadata-file) |
+| `aligned_sequences.fasta` | Step 1 output | MAFFT alignment | [⬇ Download](link-to-aligned-file) |
+| `snp_distances.tsv` | Step 2 output | Pairwise SNP distance matrix | [⬇ Download](link-to-snp-distances-file) |
+| `snp_heatmap.png` | Step 4 output | Heatmap visualization | [⬇ Download](link-to-heatmap-file) |
 
 ---
 
-### Step 3: Build Maximum Likelihood Tree 
-[Do we want to include bootstrapping nodes here too?]
+## Next Steps
 
-```bash
-# Using IQ-TREE
+**[Continue to Analysis 2: Phylogenetic Analysis](link-to-phylo-tutorial)**
 
-# Options explained:
-
-```
-
-**Output files:** (with descriptions and links to each file)
-- file1
-- file2
-
----
-
-### Step 4: Visualize and Interpret Phylogenetic Tree
-
-#### Using FigTree (or something else?)
-
-[outline steps on how to do this using FigTree or do we want this entire phylogenetic workflow to be Nextstrain based?]
-
----
-
-### Interpreting Tree Topology
-
-
-### Time-Resolved Trees Using TreeTime?
-
----
+Learn how to build and interpret phylogenetic trees to resolve the evolutionary relationships that SNP distances alone cannot reveal.

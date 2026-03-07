@@ -135,6 +135,10 @@ function renderTable(containerId = "workflow-table") {
   categoryTh.textContent = "Tags";
   headerRow.appendChild(categoryTh);
 
+  const synopsisTh = document.createElement("th");
+  synopsisTh.textContent = "Synopsis";
+  headerRow.appendChild(synopsisTh);
+
   thead.appendChild(headerRow);
   table.appendChild(thead);
 
@@ -186,8 +190,6 @@ function renderTable(containerId = "workflow-table") {
       titleTd.appendChild(titleLink);
       row.appendChild(titleTd);
 
-      console.log(title)
-
       const categoryTd = document.createElement("td");
       // Collect all category from all data items for display
       const allWorkflowCategory = {};
@@ -218,6 +220,11 @@ function renderTable(containerId = "workflow-table") {
       });
 
       row.appendChild(categoryTd);
+
+      const synopsisTd = document.createElement("td");
+      synopsisTd.textContent = [...window.synopsisMap[slug]][0];
+
+      row.appendChild(synopsisTd);
 
       tbody.appendChild(row);
     }

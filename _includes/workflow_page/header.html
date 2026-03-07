@@ -1,5 +1,6 @@
 <!--Title-->
-# {{ page.title }}
+# **{{ page.title }}**
+{: .no_toc }
 
 <!--Authors-->
 <!--Gather unique affiliations-->
@@ -36,3 +37,22 @@
   <sup>{{ forloop.index }}</sup> {{ affil }}<br>
 {% endfor %}
 </p>
+
+<hr>
+
+### Synopsis
+{: .no_toc }
+{{ page.synposis }}
+
+
+<hr>
+
+<!-- Table of contents -->
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
