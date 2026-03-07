@@ -79,7 +79,7 @@ Make sure you have the following tools installed before starting:
 
 ## Step 0: Preliminary Steps & Input Data
 
-This tutorial expects you to have completed the [Preliminary Steps](../appendix/preliminary_steps/), which walks you through downloading the data from NCBI. You should have the following files in your working directory:
+This tutorial expects you to have completed the [Preliminary Steps](../pilot/appendix/preliminary_steps/), which walks you through downloading the data from NCBI. You should have the following files in your working directory:
 
 | File | Description |
 |------|-------------|
