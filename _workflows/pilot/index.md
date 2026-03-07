@@ -243,11 +243,11 @@ Here is a summary of all input, intermediate, and output files from this tutoria
 
 | File | Step | Type | Download |
 |------|------|------|----------|
-| `sequences_ha.fasta` | Input | Unaligned HA sequences | [⬇ Download](../assets/sequences_ha.fasta) |
-| `metadata_ha.tsv` | Input | Sequence metadata | [⬇ Download](../assets/metadata_ha.tsv) |
-| `aligned_sequences.fasta` | Step 1 output | MAFFT alignment | [⬇ Download](../assets/aligned_sequences.fasta) |
-| `snp_distances.tsv` | Step 2 output | Pairwise SNP distance matrix | [⬇ Download](../assets/snp_distances.tsv) |
-| `snp_heatmap.png` | Step 4 output | Heatmap visualization | [⬇ Download](../assets/snp_heatmap.png) |
+| `sequences_ha.fasta` | Input | Unaligned HA sequences | [⬇ Download](../pilot/assets/sequences_ha.fasta) |
+| `metadata_ha.tsv` | Input | Sequence metadata | [⬇ Download](../pilot/assets/metadata_ha.tsv) |
+| `aligned_sequences.fasta` | Step 1 output | MAFFT alignment | [⬇ Download](../pilot/assets/aligned_sequences.fasta) |
+| `snp_distances.tsv` | Step 2 output | Pairwise SNP distance matrix | [⬇ Download](../pilot/assets/snp_distances.tsv) |
+| `snp_heatmap.png` | Step 4 output | Heatmap visualization | [⬇ Download](../pilot/assets/snp_heatmap.png) |
 
 ---
 
