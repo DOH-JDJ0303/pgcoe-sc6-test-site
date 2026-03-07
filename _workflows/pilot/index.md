@@ -27,11 +27,70 @@ back_to_top: true
 
 {% include workflow_page/header.html %}
 
+---
+
+## Overview
+
+During an outbreak investigation, one of the most critical questions genomic epidemiologists face is: **are these cases linked?** Single nucleotide polymorphism (SNP) distance analysis provides a rapid, interpretable way to screen sequences for relatedness by quantifying the number of nucleotide differences between every pair of sequences in your dataset.
+
+This tutorial walks you through aligning sequences, computing a pairwise SNP distance matrix, interpreting the results, and building a heatmap visualization. We use H5N1 avian influenza HA segment sequences from a Washington State outbreak investigation as an example dataset.
+
+> **Note: Single segment analysis**
+>
+> This tutorial focuses on the **HA segment (segment 4)** of influenza A H5N1. Influenza has 8 genome segments that can reassort independently, meaning different segments may have different evolutionary histories. A comprehensive investigation may want to analyze all segments and assess for reassortment events. We focus on a single segment here for clarity, and cover multi-segment and reassortment approaches in a companion tutorial.
+
+> **Note: SNP distances are only half the picture**
+>
+> SNP distances tell you *how many* mutations differ between sequences, but they cannot tell you about **ancestry, evolutionary direction, or shared history**. After completing this analysis, we recommend proceeding to the [phylogenetic analysis tutorial (Analysis 2)](#next-steps). Both methods are complementary and are often used together for outbreak investigations.
+
+### What SNP Distances Tell You
+
+A pairwise SNP distance matrix quantifies the number of single nucleotide differences between every pair of sequences in your alignment. This gives you:
+
+- **Rapid relatedness screening**: quickly identify which sequences are most similar
+- **Cluster detection**: groups of sequences with low pairwise distances suggest potential outbreak clusters
+- **Outlier identification**: sequences with high distances from a cluster may represent independent introductions
+
+### What SNP Distances Don't Tell You
+
+While powerful for initial screening, SNP distances have some important blind spots:
+
+- **No ancestry information**: you can't tell which sequence came "first" or how they're related in evolutionary terms
+- **No directionality**: SNP distances tells you nothing about transmission direction
+- **No shared vs. unique mutations**: two sequences that are each 5 SNPs from a cluster may have completely different relationships to it (see [Limitations](#limitations-why-you-need-phylogenetic-analysis-too))
+- **No temporal signal**: distances don't account for when sequences were collected
 
 ---
 
-## Step 0. Getting started
-Follow these [preliminary steps](../appendix/preliminary_steps/) to get started.
+## Required Software
+
+Make sure you have the following tools installed before starting:
+
+| Tool | Purpose | Install link |
+|------|---------|--------------|
+| [MAFFT](https://mafft.cbrc.jp/alignment/software/) | Multiple sequence alignment | [Download](https://mafft.cbrc.jp/alignment/software/) |
+| [snp-dists](https://github.com/tseemann/snp-dists) | Pairwise SNP distance calculation | [GitHub](https://github.com/tseemann/snp-dists) |
+| Python 3.x | Scripting and visualization | [python.org](https://www.python.org/) |
+| pandas | Data manipulation (Python package) | `pip install pandas` |
+| matplotlib | Plotting (Python package) | `pip install matplotlib` |
+| seaborn | Statistical data visualization (Python package) | `pip install seaborn` |
+
+---
+
+## Step 0: Preliminary Steps & Input Data
+
+This tutorial expects you to have completed the [Preliminary Steps](../appendix/preliminary_steps/), which walks you through downloading the data from NCBI. You should have the following files in your working directory:
+
+| File | Description |
+|------|-------------|
+| `sequences_ha.fasta` | H5N1 HA sequences (outbreak + contextual) |
+| `metadata_ha.tsv` | Curated metadata with outbreak/contextual designations |
+
+> **Want to jump straight in?** If you'd prefer to skip the download steps, you can grab the input files directly:
+>
+> [⬇ Download `sequences_ha.fasta`](../pilot/assets/sequences_ha.fasta)
+>
+> [⬇ Download `metadata_ha.tsv`](../pilot/assets/metadata_ha.tsv)
 
 ---
 
