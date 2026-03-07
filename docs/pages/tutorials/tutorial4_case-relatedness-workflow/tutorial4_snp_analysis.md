@@ -125,7 +125,7 @@ mafft \
 
 > **Alternative: Reference-based alignment**
 >
-> For outbreak investigations where you have a known reference, you may prefer a reference-based alignment. This ensures consistent coordinates across analyses and is especially useful when comparing results across different runs. You can do this with MAFFT using the `--addfragments` option. We cover reference-based alignment in more detail in the phylogenetic analysis tutorial.
+> For outbreak investigations where you have a known reference, you may prefer a reference-based alignment. This ensures consistent coordinates across analyses and is especially useful when comparing results across different runs. We cover reference-based alignment in more detail in the phylogenetic analysis tutorial.
 
 ### Check Alignment Quality
 
@@ -181,7 +181,14 @@ snp-dists aligned_sequences.fasta > snp_distances.tsv
 
 Open `snp_distances.tsv` and examine the pairwise distances. Here is an example of a portion of what the SNP Distance matrix might look like... 
 
-*Insert example of the snp_distances.tsv output that is constrained/maybe first 10 samples?* 
+```text
+                 PV070797.1  PV338396.1  PQ844046.1  PV337276.1  PV337788.1
+PV070797.1                0          13          12          12          12
+PV338396.1               13           0          15          17          17
+PQ844046.1               12          15           0          16          15
+PV337276.1               12          17          16           0          14
+PV337788.1               12          17          15          14           0
+```
 
 **Interpreting this example:**
 
@@ -191,19 +198,15 @@ The SNP distance matrix tells you how genetically similar or different your sequ
 - **Moderate distance (7 to 9 SNPs):** 
 - **High distance (18 to 24 SNPs):** 
 
-### Pathogen-Specific Thresholds
-
-Published literature provides rough SNP thresholds for identifying potential outbreak clusters across different pathogens. These are guidelines, not hard cutoffs, and should always be interpreted in context.
-*Do we want to provide some example pathogen thresholds here or leave it open ended for folks to figure out what some appropriate thresholds are?* 
 
 > **Use thresholds with caution:**
 >
-> Thresholds depend heavily on the duration of the outbreak (longer outbreaks accumulate more mutations), the mutation rate and generation time of the pathogen, sequencing quality and coverage, and the specific genomic region analyzed. Always consult the relevant literature for your pathogen and context.
+> Published literature provides rough SNP thresholds for identifying potential outbreak clusters across different pathogens. These are guidelines, not hard cutoffs, and should always be interpreted in context. Thresholds can depend heavily on the duration of the outbreak (longer outbreaks accumulate more mutations), the mutation rate and generation time of the pathogen, sequencing quality and coverage, and the specific genomic region analyzed. Always consult the relevant literature for your pathogen and context.
 
 
 > **A note on bacterial pathogens:**
 >
-> For bacterial pathogens, SNP analysis typically uses whole-genome alignments against a reference, often generated with tools like [Snippy](https://github.com/tseemann/snippy) rather than MAFFT. Bacterial genomes also present additional complexity from horizontal gene transfer (HGT) and recombination, which can confound SNP-based relatedness assessments. Consider masking recombinant regions with tools like [ClonalFrameML](https://github.com/xavierdidelot/ClonalFrameML) or [Gubbins](https://sanger-pathogens.github.io/gubbins/) before computing distances.
+> For bacterial pathogens, SNP analysis typically uses whole-genome alignments against a reference, often generated with tools like [Snippy](https://github.com/tseemann/snippy) rather than MAFFT. Bacterial genomes also present additional complexity from horizontal gene transfer (HGT) and recombination, which can confound SNP-based relatedness assessments. If this is of concern, you may want to consider masking recombinant regions with tools like [ClonalFrameML](https://github.com/xavierdidelot/ClonalFrameML) or [Gubbins](https://sanger-pathogens.github.io/gubbins/) before computing distances.
 
 ---
 
@@ -215,23 +218,29 @@ A heatmap provides an intuitive visual summary of the distance matrix, making cl
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import numpy as np
 
 # Load the SNP distance matrix
 df = pd.read_csv("snp_distances.tsv", sep="\t", index_col=0)
 
-# Create a clustered heatmap
-# Clustering reorders rows and columns to group similar sequences
+# Create a clustered heatmap with scale 0–20
+sns.clustermap(
+    df,
+    cmap="viridis",
+    figsize=(12, 12),
+    xticklabels=False,   # hide labels for clarity
+    yticklabels=False,
+    vmax=20              # set color scale max
+)
 
-# Format and save
+plt.title("Clustered SNP Distance Heatmap (0–20 SNPs)", pad=120)
+plt.show()
 ```
 
 **What to look for in the heatmap:**
 
-- **Dark clusters along the diagonal**: groups of sequences with low pairwise distances, indicating potential outbreak clusters.
-- **Color gradients**: the transition from light colors (low distance) to dark colors (high distance) reveals how sequences partition into groups.
+- **Dark clusters**: groups of sequences with low pairwise distances, indicating potential outbreak clusters.
+- **Color gradients**: the transition from low distance colors (dark blue) to high distance colors (yellow) reveals how sequences partition into groups.
 - **Dendrogram structure**: the hierarchical clustering dendrograms on the margins show which sequences group together. Note that this clustering is based on distance alone and is *not* a phylogenetic tree.
-- **Outliers**: rows or columns that are uniformly dark stand out as unrelated to the main cluster(s).
 
 **Step 4 output file:**
 
