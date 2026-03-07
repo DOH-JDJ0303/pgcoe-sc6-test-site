@@ -81,7 +81,7 @@ Before proceeding, visually inspect your alignment in a viewer such as [NCBI Ali
 
 > **Want to check your work or skip ahead?** Download the expected alignment output:
 >
-> [⬇ Download `aligned_sequences.fasta`](../assets/aligned_sequences.fasta)
+> [⬇ Download `aligned_sequences.fasta`](../pilot/assets/aligned_sequences.fasta)
 
 ---
 
@@ -108,7 +108,7 @@ snp-dists aligned_sequences.fasta > snp_distances.tsv
 
 > **Want to check your work or skip ahead?** Download the expected SNP distance matrix:
 >
-> [⬇ Download `snp_distances.tsv`](../assets/snp_distances.tsv)
+> [⬇ Download `snp_distances.tsv`](../pilot/assets/snp_distances.tsv)
 
 ---
 
@@ -183,7 +183,7 @@ plt.show()
 
 > **Want to see the expected result?** Download the heatmap:
 >
-> [⬇ Download `snp_heatmap.png`](../assets/snp_heatmap.png)
+> [⬇ Download `snp_heatmap.png`](../pilot/assets/snp_heatmap.png)
 
 ---
 
