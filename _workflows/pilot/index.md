@@ -19,7 +19,10 @@ author:
     affiliation: University of Washington
     title: Bioinformatician
 
-synopsis: "A step-by-step guide to calculating and interpreting pairwise SNP distances from genomic data to assess whether cases in an outbreak are related."
+synopsis: >
+  A step-by-step guide to calculating and interpreting 
+  pairwise SNP distances from genomic data to assess 
+  whether cases in an outbreak are related.
 
 layout: page
 back_to_top: true
