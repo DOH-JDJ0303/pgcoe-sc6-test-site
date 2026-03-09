@@ -26,8 +26,8 @@ callouts:
   info:
     title: Info
     color: blue
-  qc:
-    title: Quality Check
+  example:
+    title: Example
     color: purple
 
   purpose:
