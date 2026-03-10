@@ -23,7 +23,7 @@ A general overview of how to format documents with markdown can be found [here](
 
 ---
 
-## Table and Figures
+## Tables and Figures
 
 Tables can be created and formatted in R Markdown using the knitr package in R. This resource provides more information on how to create and customize a table. 
 
@@ -56,6 +56,7 @@ First-level headings define the main sections of the document. Second-level head
 ## Second-level heading <br>
 ### Third-level heading <br>
 </div>
+
 #### Rendered Output:
 <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; background-color: #ffffff">
 <h1> First-level heading </h1>
@@ -67,18 +68,17 @@ First-level headings define the main sections of the document. Second-level head
 #### Markdown:
 <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; background-color: #ffffff">
 # SNP Distance Analysis <br>
-## Purpose and Scope <br>
 ## Analytical Steps <br>
 ### Step 1: Align Sequences <br>
 ### Step 2: Calculate SNP Distances <br>
 </div>
+
 #### Rendered Output:
 <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; background-color: #ffffff">
 <h1> SNP Distance Analysis </h1>
-<h2> Purpose and Scope </h2>
-<h3> Analytical Steps </h3>
-<h4> Step 1: Align Sequences </h4>
-<h5> Step 2: Calculate SNP Distances </h5>
+<h2> Analytical Steps </h2>
+<h3> Step 1: Align Sequences </h3>
+<h3> Step 2: Calculate SNP Distances </h3>
 </div>
 
 ---
