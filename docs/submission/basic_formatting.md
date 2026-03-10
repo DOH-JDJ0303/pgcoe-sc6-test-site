@@ -39,7 +39,7 @@ Figures can be uploaded into R Markdown using the knitr package in R. Here is ex
 knitr::include_graphics(“my_image”.png) 
 ```
 
-These resources provide guidance on formatting tables and figures in the APA style in addition to example tables and figures. 
+Resources on formatting tables and figures in the APA style can be found [here](https://apastyle.apa.org/style-grammar-guidelines/tables-figures).
 
 ---
 
