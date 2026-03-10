@@ -33,11 +33,15 @@ Here is example code to generate a table using the built-in iris dataset in R:
 knitr::kable(head(mtcars[, 1:4])) 
 ```
 
-Figures can be uploaded into R Markdown using the knitr package in R. Here is example code to upload a PNG file: 
+Figures can be uploaded into markdown by modifying the following code to point towards the site-specific assets/ folder: 
 
-```r
-knitr::include_graphics(“my_image”.png) 
-```
+#### Markdown:
+<div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; background-color: #ffffff">
+![SNP Distance Heatmap](docs/submission/assets/snp_distance_heatmap.png)
+</div>
+
+#### Rendered Output:
+![SNP Distance Heatmap](docs/submission/assets/snp_distance_heatmap.png)
 
 Resources on formatting tables and figures in the APA style can be found [here](https://apastyle.apa.org/style-grammar-guidelines/tables-figures).
 
