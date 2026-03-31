@@ -23,23 +23,38 @@ A general overview of how to format documents with markdown can be found [here](
 
 ---
 
-## Table and Figures
+## Tables
 
-Tables can be created and formatted in R Markdown using the knitr package in R. This resource provides more information on how to create and customize a table. 
+Tables can be created in Markdown using pipes ( | ) to separate columns and three or more hyphens to create column headers ( --- ). This [resource](https://www.codecademy.com/resources/docs/markdown/tables) provides more information on creating and formatting tables in Markdown. Here is example code to create a table and the rendered output from the resource:
 
-Here is example code to generate a table using the built-in iris dataset in R: 
-
-```r
-knitr::kable(head(mtcars[, 1:4])) 
+#### Markdown:
 ```
-
-Figures can be uploaded into R Markdown using the knitr package in R. Here is example code to upload a PNG file: 
-
-```r
-knitr::include_graphics(“my_image”.png) 
+| Month    | Savings |
+| -------- | ------- |
+| January  | $250    |
+| February | $80     |
+| March    | $420    |
 ```
+#### Rendered Output:
+| Month    | Savings |
+| -------- | ------- |
+| January  | $250    |
+| February | $80     |
+| March    | $420    |
 
-These resources provide guidance on formatting tables and figures in the APA style in addition to example tables and figures. 
+---
+
+## Figures
+
+Figures can be uploaded into Markdown by modifying the following code to point towards the site-specific assets/ folder: 
+
+#### Markdown:
+<div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; background-color: #ffffff">
+![SNP Distance Heatmap](docs/submission/assets/snp_distance_heatmap.png)
+</div>
+
+#### Rendered Output:
+![SNP Distance Heatmap](docs/submission/assets/snp_distance_heatmap.png)
 
 ---
 
@@ -56,6 +71,7 @@ First-level headings define the main sections of the document. Second-level head
 ## Second-level heading <br>
 ### Third-level heading <br>
 </div>
+
 #### Rendered Output:
 <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; background-color: #ffffff">
 <h1> First-level heading </h1>
@@ -67,18 +83,17 @@ First-level headings define the main sections of the document. Second-level head
 #### Markdown:
 <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; background-color: #ffffff">
 # SNP Distance Analysis <br>
-## Purpose and Scope <br>
 ## Analytical Steps <br>
 ### Step 1: Align Sequences <br>
 ### Step 2: Calculate SNP Distances <br>
 </div>
+
 #### Rendered Output:
 <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; background-color: #ffffff">
 <h1> SNP Distance Analysis </h1>
-<h2> Purpose and Scope </h2>
-<h3> Analytical Steps </h3>
-<h4> Step 1: Align Sequences </h4>
-<h5> Step 2: Calculate SNP Distances </h5>
+<h2> Analytical Steps </h2>
+<h3> Step 1: Align Sequences </h3>
+<h3> Step 2: Calculate SNP Distances </h3>
 </div>
 
 ---
