@@ -115,13 +115,18 @@ First-level headings define the main sections of the document. Second-level head
 - Keep lines under 80 characters
 - Use realistic bioinformatics examples
 - Note required dependencies
+- Include tool versions when relevant
+- Explain unique flags in comments or notes (skip common ones like --threads, --cpu)
+- Purpose statement should capture high-level workflow goals
 
 ### Examples 
+
+
 
 #### Python - Sequence Analysis
 {% highlight markdown %}
 **Purpose:** Extract QC metrics from FASTA files
-```python
+```python3.12
 from Bio import SeqIO
 import pandas as pd
 >
@@ -157,4 +162,32 @@ spades.py -1 ${SAMPLE_ID}_clean_R1.fq -2 ${SAMPLE_ID}_clean_R2.fq \
 **Notes:** Requires fastp and SPAdes in PATH 
 {% endhighlight %}
 
+
+#### MLST & AMR Analysis
+
+{% highlight markdown %}
+**Purpose**: Determine sequence type and identify antimicrobial resistance genes
+```bash
+# Run MLST typing
+mlst --scheme ecoli contigs.fasta > mlst_results.txt
+
+# Screen for AMR genes
+abricate \
+  --db resfinder \
+  --minid 80 \
+  --mincov 60 \
+  contigs.fasta > amr_results.tab
+```
+
+### Tool Options Explained
+
+| Flag | Description |
+|------|-------------|
+| `--scheme ecoli` | Specifies the MLST scheme to use. Available schemes include ecoli, saureus, lmonocytogenes, etc. Use `mlst --list` to see all options. |
+| `--db resfinder` | Uses the ResFinder database for AMR gene detection. Other options include CARD (`--db card`) or NCBI (`--db ncbi`). |
+| `--minid 80` | Minimum identity threshold (80%). Genes must have at least 80% sequence identity to database entries to be reported. |
+| `--mincov 60` | Minimum coverage threshold (60%). At least 60% of the gene length must be covered by the query sequence. |
+
+**Notes**: Requires mlst v2.19+ and abricate v1.0+
+{% endhighlight %}
 ---
