@@ -30,15 +30,21 @@ function renderCategory(containerId = "search-category") {
   container.innerHTML = "";
 
   for (const [group, values] of Object.entries(allCategory)) {
+    // --- group container ---
+    const groupBox = document.createElement("details");
+    groupBox.className = "filter-group";
+    groupBox.open = false;
+    container.appendChild(groupBox);
+
     // --- header ---
-    const header = document.createElement("h3");
+    const header = document.createElement("summary");
     header.textContent = group;
-    container.appendChild(header);
+    groupBox.appendChild(header);
 
     // --- button container ---
     const btnRow = document.createElement("div");
     btnRow.className = "filter-buttons";
-    container.appendChild(btnRow);
+    groupBox.appendChild(btnRow);
 
     // --- buttons ---
     [...values].sort().forEach(value => {
