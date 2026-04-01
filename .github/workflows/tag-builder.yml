@@ -24,4 +24,4 @@ jobs:
           pip install pyyaml
 
       - name: Run script
-        run: python helpers/tag-builder/script.py
+        run: python helpers/tag-builder.py
