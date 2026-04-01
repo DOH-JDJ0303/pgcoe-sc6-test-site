@@ -25,7 +25,7 @@ A general overview of how to format documents with markdown can be found [here](
 
 ## Tables
 
-Tables can be created in Markdown using pipes ( | ) to separate columns and three or more hyphens to create column headers ( --- ). This [resource](https://www.codecademy.com/resources/docs/markdown/tables) provides more information on creating and formatting tables in Markdown. Here is example code to create a table and the rendered output from the resource:
+Tables can be created in Markdown using pipes ( `|` ) to separate columns and three or more hyphens to create column headers ( `---` ). This [resource](https://www.codecademy.com/resources/docs/markdown/tables) provides more information on creating and formatting tables in Markdown. Here is example code to create a table and the rendered output from the resource:
 
 #### Markdown:
 ```
