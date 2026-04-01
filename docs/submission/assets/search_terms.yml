@@ -1,51 +1,47 @@
 category:
-  organism:
-    - bacteria
-    - virus
-    - yeast
-
-  sample_type:
-    - clinical
-    - zoonotic
-    - environmental
-    - wastewater
-
-  transmission_route:
-    - respiratory
-    - fecal-oral
-    - bloodborne
-
-  genome_features:
-    - segmented genome
-    - high mutation rate
-    - recombinant
-
   analysis_type:
-    - antimicrobial resistance
-    - virulence
-    - outbreak
-    - vaccine escape
-    - phylogenetic
-
+  - antimicrobial resistance
+  - outbreak
+  - phylogenetic
+  - vaccine escape
+  - virulence
+  application:
+  - outbreak investigation
+  - surveillance
+  genome_features:
+  - high mutation rate
+  - recombinant
+  - segmented genome
+  organism:
+  - bacteria
+  - virus
+  - yeast
   result_type:
-    - distance matrix
-    - heatmap
-    - phylogenetic tree
-    - bar plot
-    - relatedness network
-    - summary report
-    - microreact
-
-  sequencing_platform:
-    - illumina
-    - nanopore
-    - pacbio
-    - sanger
-
+  - bar plot
+  - distance matrix
+  - heatmap
+  - microreact
+  - phylogenetic tree
+  - relatedness network
+  - summary report
+  sample_type:
+  - clinical
+  - environmental
+  - wastewater
+  - zoonotic
   sequencing_method:
-    - whole genome
-    - targeted
-    - hybrid capture
-    - tiled amplicon
-    - metagenomic
-    - metabarcode
+  - hybrid capture
+  - metabarcode
+  - metagenomic
+  - targeted
+  - tiled amplicon
+  - whole genome
+  sequencing_platform:
+  - illumina
+  - nanopore
+  - pacbio
+  - sanger
+  transmission_route:
+  - bloodborne
+  - fecal-oral
+  - respiratory
