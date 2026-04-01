@@ -36,6 +36,7 @@ Tables can be created in Markdown using pipes ( | ) to separate columns and thre
 | March    | $420    |
 ```
 #### Rendered Output:
+
 | Month    | Savings |
 | -------- | ------- |
 | January  | $250    |
@@ -46,15 +47,16 @@ Tables can be created in Markdown using pipes ( | ) to separate columns and thre
 
 ## Figures
 
-Figures can be uploaded into Markdown by modifying the following code to point towards the site-specific assets/ folder: 
+Figures can be uploaded into Markdown by modifying the following code to point towards the workflow-specific assets/ folder:
 
 #### Markdown:
-<div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; background-color: #ffffff">
-![SNP Distance Heatmap](docs/submission/assets/snp_distance_heatmap.png)
-</div>
+```
+![SNP Distance Heatmap](assets/snp_distance_heatmap.png)
+```
 
 #### Rendered Output:
-![SNP Distance Heatmap](docs/submission/assets/snp_distance_heatmap.png)
+
+![SNP Distance Heatmap](assets/snp_distance_heatmap.png)
 
 ---
 

@@ -48,6 +48,7 @@ category:
 
 ## Author Information
 Author information should be provided for all individuals who contributed significantly to a workflow. At least one author must be listed for correspondence.
+
 **Example:**
 ```yaml 
 --- 
