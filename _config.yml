@@ -46,4 +46,9 @@ callouts:
   subtle:
     color: subtle
     opacity: 0.1
+
+footer_content: ''
+
+head_scripts:
+  - "/assets/js/workflow_page/toc_sidebar.js"
     
