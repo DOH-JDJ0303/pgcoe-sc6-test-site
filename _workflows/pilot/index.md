@@ -318,3 +318,5 @@ Here is a summary of all input, intermediate, and output files from this tutoria
 **[Continue to Analysis 2: Phylogenetic Analysis](link-to-phylo-tutorial)**
 
 Learn how to build and interpret phylogenetic trees to resolve the evolutionary relationships that SNP distances alone cannot reveal.
+
+{% include workflow_page/footer.html %}

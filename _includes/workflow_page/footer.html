@@ -1,0 +1,97 @@
+</div>
+
+<style>
+#main-content main {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+  align-items: start;
+}
+
+#toc-sb {
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  font-size: 0.75rem;
+  padding-left: 1.5rem;
+  width: 300px;
+}
+
+#toc-sb .toc-sb-heading {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5c5962;
+  margin-bottom: 0.5rem;
+}
+
+#toc-sb ul { list-style: none; padding: 0; }
+
+#toc-sb a {
+  display: block;
+  padding: 3px 8px;
+  color: #5c5962;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  border-radius: 0;
+}
+
+#toc-sb a:hover { color: #7253ed; }
+
+#toc-sb a.active {
+  color: #7253ed;
+  border-left-color: #7253ed;
+  font-weight: 600;
+}
+
+#toc-sb a.toc-sb-h3 { padding-left: 16px; font-size: 11px; }
+
+@media (max-width: 900px) {
+  #main-content main { grid-template-columns: 1fr; }
+  #toc-sb { display: none; }
+}
+</style>
+
+<nav id="toc-sb" aria-label="On this page">
+  <p class="toc-sb-heading">On this page</p>
+  <ul id="toc-sb-list"></ul>
+</nav>
+
+<script>
+function buildTocSidebar() {
+  const content = document.getElementById('main-content');
+  const list = document.getElementById('toc-sb-list');
+  if (!content || !list) return;
+
+  const headings = [...content.querySelectorAll('h2, h3')];
+  if (!headings.length) {
+    document.querySelector('.page-toc-sb')?.remove();
+    return;
+  }
+
+  headings.forEach(h => {
+    const a = document.createElement('a');
+    a.href = `#${h.id}`;
+    a.textContent = h.textContent;
+    if (h.tagName === 'H3') a.classList.add('toc-sb-h3');
+    const li = document.createElement('li');
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const link = list.querySelector(`a[href="#${entry.target.id}"]`);
+      if (entry.isIntersecting) link?.classList.add('active');
+      else link?.classList.remove('active');
+    });
+    
+  }, { rootMargin: '0px 0px -70% 0px' });
+
+  headings.forEach(h => observer.observe(h));
+}
+
+document.addEventListener('DOMContentLoaded', buildTocSidebar);
+</script>
