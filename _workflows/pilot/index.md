@@ -11,7 +11,7 @@ category:
     - outbreak investigation
 
 author:
-  - name: Pauline Trihn
+  - name: Pauline Trinh
     affiliation: Washington State Department of Health
     title: Molecular Epidemiologist
     email: coolbeans@gmail.com
@@ -46,7 +46,7 @@ This tutorial walks you through aligning sequences, computing a pairwise SNP dis
 >
 > SNP distances tell you *how many* mutations differ between sequences, but they cannot tell you about **ancestry, evolutionary direction, or shared history**. After completing this analysis, we recommend proceeding to the [phylogenetic analysis tutorial (Analysis 2)](#next-steps). Both methods are complementary and are often used together for outbreak investigations.
 
-### What SNP Distances Tell You
+### What you'll learn from this analysis
 
 A pairwise SNP distance matrix quantifies the number of single nucleotide differences between every pair of sequences in your alignment. This gives you:
 
@@ -54,18 +54,12 @@ A pairwise SNP distance matrix quantifies the number of single nucleotide differ
 - **Cluster detection**: groups of sequences with low pairwise distances suggest potential outbreak clusters
 - **Outlier identification**: sequences with high distances from a cluster may represent independent introductions
 
-### What SNP Distances Don't Tell You
-
-While powerful for initial screening, SNP distances have some important blind spots:
-
-- **No ancestry information**: you can't tell which sequence came "first" or how they're related in evolutionary terms
-- **No directionality**: SNP distances tells you nothing about transmission direction
-- **No shared vs. unique mutations**: two sequences that are each 5 SNPs from a cluster may have completely different relationships to it (see [Limitations](#limitations-why-you-need-phylogenetic-analysis-too))
-- **No temporal signal**: distances don't account for when sequences were collected
+For what this analysis *can't* tell you please see [Limitations](#limitations)
 
 ---
+## Before You Begin 
 
-## Required Software
+### Required Software
 
 Make sure you have the following tools installed before starting:
 
@@ -80,7 +74,7 @@ Make sure you have the following tools installed before starting:
 
 ---
 
-## Step 0: Preliminary Steps & Input Data
+### Input Files 
 
 This tutorial expects you to have completed the [Preliminary Steps](../pilot/appendix/preliminary_steps/), which walks you through downloading the data from NCBI. You should have the following files in your working directory:
 
@@ -174,7 +168,7 @@ snp-dists aligned_sequences.fasta > snp_distances.tsv
 
 ---
 
-## Step 3: Interpret the SNP Distance Matrix
+## Interpreting Your Results
 
 ### Reading the Matrix
 
@@ -209,7 +203,7 @@ The SNP distance matrix tells you how genetically similar or different your sequ
 
 ---
 
-## Step 4: Visualize SNP Distances with a Heatmap
+### Visualize SNP Distances with a Heatmap
 
 A heatmap provides an intuitive visual summary of the distance matrix, making clusters and outliers immediately apparent. Use the following Python script to generate a publication-ready heatmap:
 
@@ -249,7 +243,18 @@ plt.show()
 
 ---
 
-## Limitations: Why You Need Phylogenetic Analysis Too
+## Limitations
+
+### What SNP Distances Don't Tell You
+
+While powerful for initial screening, SNP distances have some important blind spots:
+
+- **No ancestry information**: you can't tell which sequence came "first" or how they're related in evolutionary terms
+- **No directionality**: SNP distances tells you nothing about transmission direction
+- **No shared vs. unique mutations**: two sequences that are each 5 SNPs from a cluster may have completely different relationships to it (see [Limitations](#limitations-why-you-need-phylogenetic-analysis-too))
+- **No temporal signal**: distances don't account for when sequences were collected
+
+### Why You Need Phylogenetic Analysis Too
 
 The SNP distance matrix is a powerful screening tool, but it fundamentally cannot distinguish between different evolutionary scenarios that produce the same pairwise distances. Here is a concrete example.
 
