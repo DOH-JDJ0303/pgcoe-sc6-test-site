@@ -314,7 +314,7 @@ Here is a summary of all input, intermediate, and output files from this tutoria
 | `metadata_ha.tsv` | Input | Sequence metadata | [⬇ Download](../assets/metadata_ha.tsv) |
 | `aligned_sequences.fasta` | Step 1 output | MAFFT alignment | [⬇ Download](../assets/aligned_sequences.fasta) |
 | `snp_distances.tsv` | Step 2 output | Pairwise SNP distance matrix | [⬇ Download](../assets/snp_distances.tsv) |
-| `snp_heatmap.png` | Step 4 output | Heatmap visualization | [⬇ Download](../assets/snp_heatmap.png) |
+| `snp_distance_heatmap.png` | Step 4 output | Heatmap visualization | [⬇ Download](../assets/snp_distance_heatmap.png) |
 
 ---
 
