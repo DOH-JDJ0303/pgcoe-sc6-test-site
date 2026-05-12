@@ -239,7 +239,7 @@ plt.show()
 
 > **Want to see the expected result?** Download the heatmap:
 >
-> [⬇ Download `snp_heatmap.png`](../assets/snp_heatmap.png)
+> [⬇ Download `snp_heatmap.png`](../assets/snp_distance_heatmap.png)
 
 ---
 
