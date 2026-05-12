@@ -155,7 +155,15 @@ You can also use words, to fit your writing style more closely<sup><a href="#fn3
 
 ---
 
-## References (styles & location) / tool versions –Sushmita
+## References (styles & location) / tool versions
+
+#### Simple citations:
+
+Citing with the name of the citation appearing first: 
+Some text about _Klebsiella_ [Bagley, 1985](https://doi.org/10.1017/S0195941700062603).
+
+If you'd instead only like to include the citation link without the reference mentioned: 
+Some text about _Klebsiella_ [](https://doi.org/10.1017/S0195941700062603).
 
 Including citations, especially BibTeX: <https://mystmd.org/guide/citations>
 
