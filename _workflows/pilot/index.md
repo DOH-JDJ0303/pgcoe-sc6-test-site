@@ -76,7 +76,7 @@ Make sure you have the following tools installed before starting:
 
 ### Input Files 
 
-This tutorial expects you to have completed the [Preliminary Steps](../pilot/appendix/preliminary_steps/), which walks you through downloading the data from NCBI. You should have the following files in your working directory:
+This tutorial expects you to have completed the [Preliminary Steps](../appendix/preliminary_steps/), which walks you through downloading the data from NCBI. You should have the following files in your working directory:
 
 | File | Description |
 |------|-------------|
@@ -85,9 +85,9 @@ This tutorial expects you to have completed the [Preliminary Steps](../pilot/app
 
 > **Want to jump straight in?** If you'd prefer to skip the download steps, you can grab the input files directly:
 >
-> [⬇ Download `sequences_ha.fasta`](../pilot/assets/sequences_ha.fasta)
+> [⬇ Download `sequences_ha.fasta`](../assets/sequences_ha.fasta)
 >
-> [⬇ Download `metadata_ha.tsv`](../pilot/assets/metadata_ha.tsv)
+> [⬇ Download `metadata_ha.tsv`](../assets/metadata_ha.tsv)
 
 ---
 
@@ -137,7 +137,7 @@ Before proceeding, visually inspect your alignment in a viewer such as [NCBI Ali
 
 > **Want to check your work or skip ahead?** Download the expected alignment output:
 >
-> [⬇ Download `aligned_sequences.fasta`](../pilot/assets/aligned_sequences.fasta)
+> [⬇ Download `aligned_sequences.fasta`](../assets/aligned_sequences.fasta)
 
 ---
 
@@ -164,7 +164,7 @@ snp-dists aligned_sequences.fasta > snp_distances.tsv
 
 > **Want to check your work or skip ahead?** Download the expected SNP distance matrix:
 >
-> [⬇ Download `snp_distances.tsv`](../pilot/assets/snp_distances.tsv)
+> [⬇ Download `snp_distances.tsv`](../assets/snp_distances.tsv)
 
 ---
 
@@ -239,7 +239,7 @@ plt.show()
 
 > **Want to see the expected result?** Download the heatmap:
 >
-> [⬇ Download `snp_heatmap.png`](../pilot/assets/snp_heatmap.png)
+> [⬇ Download `snp_heatmap.png`](../assets/snp_heatmap.png)
 
 ---
 
@@ -310,11 +310,11 @@ Here is a summary of all input, intermediate, and output files from this tutoria
 
 | File | Step | Type | Download |
 |------|------|------|----------|
-| `sequences_ha.fasta` | Input | Unaligned HA sequences | [⬇ Download](../pilot/assets/sequences_ha.fasta) |
-| `metadata_ha.tsv` | Input | Sequence metadata | [⬇ Download](../pilot/assets/metadata_ha.tsv) |
-| `aligned_sequences.fasta` | Step 1 output | MAFFT alignment | [⬇ Download](../pilot/assets/aligned_sequences.fasta) |
-| `snp_distances.tsv` | Step 2 output | Pairwise SNP distance matrix | [⬇ Download](../pilot/assets/snp_distances.tsv) |
-| `snp_heatmap.png` | Step 4 output | Heatmap visualization | [⬇ Download](../pilot/assets/snp_heatmap.png) |
+| `sequences_ha.fasta` | Input | Unaligned HA sequences | [⬇ Download](../assets/sequences_ha.fasta) |
+| `metadata_ha.tsv` | Input | Sequence metadata | [⬇ Download](../assets/metadata_ha.tsv) |
+| `aligned_sequences.fasta` | Step 1 output | MAFFT alignment | [⬇ Download](../assets/aligned_sequences.fasta) |
+| `snp_distances.tsv` | Step 2 output | Pairwise SNP distance matrix | [⬇ Download](../assets/snp_distances.tsv) |
+| `snp_heatmap.png` | Step 4 output | Heatmap visualization | [⬇ Download](../assets/snp_heatmap.png) |
 
 ---
 
