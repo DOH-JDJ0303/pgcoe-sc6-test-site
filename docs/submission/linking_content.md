@@ -160,19 +160,27 @@ You can also use words, to fit your writing style more closely<sup><a href="#fn3
 #### Simple citations:
 
 Citing with the name of the citation appearing first: 
-Some text about _Klebsiella_ [Bagley, 1985](https://doi.org/10.1017/S0195941700062603).
 
-If you'd instead only like to include the citation link without the reference mentioned: 
-Some text about _Klebsiella_ [](https://doi.org/10.1017/S0195941700062603).
+Some text about _Klebsiella_ [(Bagley, 1985)](https://doi.org/10.1017/S0195941700062603).
 
-Including citations, especially BibTeX: <https://mystmd.org/guide/citations>
 
-If using HackMD: citations can be added like this: Paragraph Citations - HackMD
+If you'd instead only like to include the DOI without the reference mentioned: 
 
-Citing non-tools on Github pages: <https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files>
+Some text about _Klebsiella_ and then the DOI: <doi.org/10.1017/S0195941700062603>.
 
-Citation file format on Github: <https://citation-file-format.github.io/>
+
+#### Citing using BibTeX:
+
+Please refer to this and other guides for inserting BibTeX citations: <https://mystmd.org/guide/citations>
+
+
+#### Citing software and other information on Github pages: 
+
+[This link](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files#citing-something-other-than-software) provides clear guidance on how to cite software and other types of information (e.g. datasets) in GitHub. 
+The citation prompt on GitHub provides citations in APA and BibTeX formats. 
+[Citation file format on Github](https://citation-file-format.github.io/)
 
 <https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md>
 
-See section "Referencing other work"
+
+See section [Reference links (inline)](#reference-links-inline).
