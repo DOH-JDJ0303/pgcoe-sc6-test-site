@@ -76,8 +76,7 @@ Two pre-made files are provided for this tutorial:
 
 2. **`metadata_ha.tsv`**: Metadata for each sequence, including collection date, location, host, and a column indicating whether each sequence is an **outbreak** sequence or a **contextual** background sequence.
 
-<a href="../../assets/sequences_ha.fasta" download="sequences_ha.fasta">⬇ Download `sequences_ha.fasta`</a>
->
+<a href="../../assets/accessions_ha.tsv" download="accessions_ha.tsv">⬇ Download `accessions_ha.tsv`</a>
 <a href="../../assets/metadata_ha.tsv" download="metadata_ha.tsv">⬇ Download `metadata_ha.tsv`</a>
 
 Place both files in your working directory for this tutorial:
