@@ -168,7 +168,7 @@ snp-dists aligned_sequences.fasta > snp_distances.tsv
 
 ---
 
-## Interpreting Your Results
+## Step 3: Interpreting Your Results
 
 ### Reading the Matrix
 
@@ -187,9 +187,9 @@ PV337788.1               12          17          15          14           0
 
 The SNP distance matrix tells you how genetically similar or different your sequences are to each other. Each number represents the count of single nucleotide differences between a pair of sequences. Lower numbers mean more closely related sequences, and higher numbers mean more distantly related sequences.
 
-- **Low distances (0 to 3 SNPs):** 
-- **Moderate distance (7 to 9 SNPs):** 
-- **High distance (18 to 24 SNPs):** 
+- **Low distances: 0 to 3 SNPs** 
+- **Moderate distance: 7 to 9 SNPs** 
+- **High distance: 18 to 24 SNPs** 
 
 
 > **Use thresholds with caution:**
@@ -226,7 +226,7 @@ sns.clustermap(
 )
 
 plt.title("Clustered SNP Distance Heatmap (0–20 SNPs)", pad=120)
-plt.show()
+plt.savefig()
 ```
 
 **What to look for in the heatmap:**
@@ -235,7 +235,7 @@ plt.show()
 - **Color gradients**: the transition from low distance colors (dark blue) to high distance colors (yellow) reveals how sequences partition into groups.
 - **Dendrogram structure**: the hierarchical clustering dendrograms on the margins show which sequences group together. Note that this clustering is based on distance alone and is *not* a phylogenetic tree.
 
-**Step 4 output file:**
+**Step 3 output file:**
 
 > **Want to see the expected result?** Download the heatmap:
 >
