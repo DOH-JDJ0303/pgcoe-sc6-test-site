@@ -1,5 +1,4 @@
-## Workflow header format: 
-
+---
 title: [Question this analysis answers, phrased as a question]
 date: "YYYY-MM-DD"
 category:
@@ -20,6 +19,10 @@ synopsis: >
 layout: page
 back_to_top: true
 
+
+---
+
+{% include workflow_page/header.html %}
 
 ---
 
