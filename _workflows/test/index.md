@@ -149,8 +149,8 @@ In this tutorial, you learned how to:
 
 ## Next Steps
 
-{% include workflow_page/footer.html %}
-
 **[Continue to [Next Tutorial Title] if applicable](link)**
 
 [Describe any tutorials or links to anything that might be complementary to this one.]
+
+{% include workflow_page/footer.html %}
