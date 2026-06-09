@@ -19,7 +19,9 @@ synopsis: >
 layout: page
 back_to_top: true
 ---
+
 {% include workflow_page/header.html %}
+
 ---
 
 ## Overview
@@ -146,6 +148,8 @@ In this tutorial, you learned how to:
 ---
 
 ## Next Steps
+
+{% include workflow_page/footer.html %}
 
 **[Continue to [Next Tutorial Title] if applicable](link)**
 
