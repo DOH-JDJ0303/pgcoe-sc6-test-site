@@ -1,6 +1,6 @@
 ---
 title: Question this analysis answers, phrased as a question
-date: "YYYY-MM-DD"
+date: "2026-09-06"
 category:
   organism:
     - virus
