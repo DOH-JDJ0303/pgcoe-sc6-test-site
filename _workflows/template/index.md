@@ -1,21 +1,21 @@
 ---
 title: Question this analysis answers, phrased as a question
-date: "2026-09-06"
+date: "2026-06-09"
 category:
   organism:
     - virus
   application:
-    - surviellance
+    - surveillance
 author:
   - name: Jane Doe
     affiliation: University A
     title: Researcher
     email: jane.doe@gmail.com
-    
+
 synopsis: >
   One to two sentence plain-language summary of what 
   this tutorial does and what question it answers.
-  
+
 layout: page
 back_to_top: true
 ---
