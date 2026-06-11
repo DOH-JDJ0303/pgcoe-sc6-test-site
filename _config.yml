@@ -51,4 +51,8 @@ footer_content: ''
 
 head_scripts:
   - "/assets/js/workflow_page/toc_sidebar.js"
+
+mermaid:
+  version: "9.1.3"
+
     

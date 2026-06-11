@@ -1,7 +1,7 @@
 ---
 title: Linking & Referencing
 nav_order: 3
-parent: Submission Guide
+parent: Markdown Formatting
 layout: page
 ---
 

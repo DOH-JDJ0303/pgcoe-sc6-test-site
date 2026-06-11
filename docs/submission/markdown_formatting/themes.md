@@ -1,7 +1,7 @@
 ---
 title: Colors & Themes
-nav_order: 5
-parent: Submission Guide
+nav_order: 4
+parent: Markdown Formatting
 layout: page
 ---
 

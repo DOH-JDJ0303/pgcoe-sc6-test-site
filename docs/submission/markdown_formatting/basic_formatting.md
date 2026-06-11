@@ -1,7 +1,7 @@
 ---
 title: Basic Formatting
 nav_order: 2
-parent: Submission Guide
+parent: Markdown Formatting
 layout: page
 ---
 

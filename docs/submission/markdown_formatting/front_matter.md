@@ -1,7 +1,7 @@
 ---
 title: Front Matter
 nav_order: 1
-parent: Submission Guide
+parent: Markdown Formatting
 layout: page
 ---
 
@@ -32,7 +32,7 @@ synopsis: >
 ```
 
 ## Search Terms / Categories
-Search terms allow users to find workflows based on their scope, data type, and intended application. A list of commonly used search terms and their categories is maintained [here](assets/search_terms.yml). Workflows must include search terms for the target organism(s) and application area(s). Inclusion of additional search terms is optional. Common search terms should be used when possible.
+Search terms allow users to find workflows based on their scope, data type, and intended application. A list of commonly used search terms and their categories is maintained [here](../assets/workflow_template.v1/search_terms.yml). Workflows must include search terms for the target organism(s) and application area(s). Inclusion of additional search terms is optional. Common search terms should be used when possible.
 
 **Example:**
 ```yaml
