@@ -55,4 +55,7 @@ head_scripts:
 mermaid:
   version: "9.1.3"
 
+exclude:
+  - /docs/submission/assets/workflow_template.v1/template.md
+
     

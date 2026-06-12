@@ -1,9 +1,8 @@
-<!--
-  Front matter: metadata block that describes this tutorial/analysis page.
-  The static-site generator reads these fields to set the page details (e.g., title, date, etc.,). 
-  Fill in each field below per the inline comments.
--->
 ---
+# FRONT MATTER: metadata block that describes this tutorial/analysis page.
+# The static-site generator reads these fields to set the page details (e.g., title, date, etc.,). 
+# Fill in each field below per the inline comments.
+
 # The title should be phrased as a question — specifically, the question that
 # this analysis/tutorial answers. Keep it concise and human-readable.
 title: Question this analysis answers, phrased as a question
@@ -51,7 +50,6 @@ author:
   this analysis solves and when someone would reach for it. Write for a reader
   who is still deciding whether this tutorial applies to their situation.
 -->
-
 
 ### What you'll learn from this analysis
 
