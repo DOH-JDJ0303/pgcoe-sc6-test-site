@@ -5,7 +5,7 @@ date: "2026-02-10"
 
 category:
   organism:
-    - bacteria
+    - virus
   application:
     - surveillance
     - outbreak investigation
