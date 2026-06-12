@@ -83,6 +83,13 @@ your-workflow/
 
 ### Editing the workflow template
 
+We recommend editing `template.md` in an editor with Markdown support and live
+preview, such as [Visual Studio Code](https://code.visualstudio.com/) (free
+desktop editor; open the preview pane with `Ctrl+Shift+V` /
+`Cmd+Shift+V`), [HackMD](https://hackmd.io/) (free browser-based Markdown
+editor — no installation required, with side-by-side preview as you type),
+or by rendering the site locally (see [Advanced users](#advanced-users) section).
+
 Open `template.md` and work through it top to bottom:
 
 1. **Fill out the front matter.** Complete every field following the inline
@@ -97,7 +104,7 @@ Open `template.md` and work through it top to bottom:
    relative paths (e.g., `assets/step1_output.ext`). Each file must stay within
    GitHub's upload limits — 25 MB per file via the web interface, 100 MB hard
    cap. For anything larger, link to an external source (e.g., NCBI) instead.
-   See the `assets/` directory README for details.
+   Note: These will not render if using HackMD.
 
 ---
 
