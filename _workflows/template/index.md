@@ -3,7 +3,7 @@ title: Question this analysis answers, phrased as a question
 date: "2026-06-09"
 category:
   organism:
-    - virus
+    - bacteria
   application:
     - surveillance
 author:
