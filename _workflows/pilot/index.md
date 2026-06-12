@@ -205,7 +205,15 @@ The SNP distance matrix tells you how genetically similar or different your sequ
 
 ### Visualize SNP Distances with a Heatmap
 
-A heatmap provides an intuitive visual summary of the distance matrix, making clusters and outliers immediately apparent. Use the following Python script to generate a publication-ready heatmap:
+A heatmap provides an intuitive visual summary of the distance matrix, making clusters and outliers immediately apparent. Use the following Python script to generate a publication-ready heatmap.
+
+First, install the required dependencies (only needed once):
+
+```bash
+pip install pandas seaborn matplotlib
+```
+
+Save the script below to a file named `plot_heatmap.py` in the same directory as your `snp_distances.tsv` file:
 
 ```python
 import pandas as pd
@@ -226,8 +234,16 @@ sns.clustermap(
 )
 
 plt.title("Clustered SNP Distance Heatmap (0–20 SNPs)", pad=120)
-plt.savefig()
+plt.savefig(fname="snpmatrix",dpi=300)
 ```
+
+Then run it from the command line:
+
+```bash
+python plot_heatmap.py
+```
+
+This produces `snpmatrix.png` in the same directory.
 
 **What to look for in the heatmap:**
 
