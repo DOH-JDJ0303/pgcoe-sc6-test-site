@@ -12,4 +12,6 @@ nav_order: 3
 
 ---
 
+{::nomarkdown}
 {% include search_table/index.html %}
+{:/nomarkdown}
