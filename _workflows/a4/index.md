@@ -9,6 +9,8 @@ category:
   application:
     - surveillance
     - outbreak investigation
+  status:
+    - complete
 
 author:
   - name: Pauline Trinh

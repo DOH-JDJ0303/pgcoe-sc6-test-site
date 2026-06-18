@@ -1,4 +1,4 @@
-title: PGCoE SC6 Test Site
+title: PGCoE SC6 - Unified Pathogen Genomic Analytics
 description: Test site for PGCoE SC6
 theme: just-the-docs
 
@@ -6,46 +6,12 @@ url: https://doh-jdj0303.github.io
 baseurl: /pgcoe-sc6-test-site
 
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  Site Source: https://github.com/doh-jdj0303/pgcoe-sc6-test-site
 
 collections:
   workflows:
     output: true
     permalink: /workflows/:path/
-
-callouts:
-  tip:
-    title: Tip
-    color: green
-  warning:
-    title: Warning
-    color: yellow
-  important:
-    title: Important
-    color: red
-  info:
-    title: Info
-    color: blue
-  example:
-    title: Example
-    color: purple
-
-  purpose:
-    title: Purpose
-    color: charcoal
-    opacity: 0.1
-  limit:
-    title: Limitations
-    color: persiangreen
-    opacity: 0.1
-  data:
-    title: Data Requirements
-    color: saffron
-    opacity: 0.1
-
-  subtle:
-    color: subtle
-    opacity: 0.1
 
 footer_content: ''
 
