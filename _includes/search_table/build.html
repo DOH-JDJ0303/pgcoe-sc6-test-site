@@ -1,19 +1,31 @@
-{% for w in site.workflows %}
-  {% unless w.url contains "/workflows/" and w.url contains "/index" %}
-    {% continue %}
-  {% endunless %}
-  {% assign parts = w.path | split: "/" %}
-  {% assign idx = parts.size | minus: 2 %}
-  {% assign tag = parts[idx] %}
-  <script>updateArray("{{tag}}", "{{w.title}}", window.titleMap)</script>
-  <script>updateArray("{{tag}}", "{{w.synopsis}}", window.synopsisMap)</script>
-  <script>WfCategory = {}</script>
-  {% if w.category %}
-    {% for pair in w.category %}
-      {% for v in pair[1] %}
-  <script>updateArray("{{pair[0]}}", "{{v}}", WfCategory)</script>
-      {% endfor %}
+<table id="workflow-table" class="display wf-table" style="width:100%">
+  <thead>
+    <tr>
+      <th>Workflow</th>
+      <th>Tags</th>
+      <th>Synopsis</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for w in site.workflows %}
+      {% unless w.url contains "/workflows/" and w.url contains "/index" %}{% continue %}{% endunless %}
+      {% if w.category %}{% capture cat_json %}{{ w.category | jsonify }}{% endcapture %}{% else %}{% assign cat_json = "{}" %}{% endif %}
+      <tr data-category="{{ cat_json | escape }}">
+        <td class="wf-title">
+          <a href="{{ w.url | relative_url }}" target="_blank" rel="noopener noreferrer">{{ w.title | escape }}</a>
+        </td>
+        <td class="wf-tags">
+          {% if w.category %}
+            {% for pair in w.category %}
+              <div class="tag-group">
+                <span class="tag-group-label">{{ pair[0] | escape }}</span>
+                {% for v in pair[1] %}<span class="tag-chip">{{ v | escape }}</span>{% endfor %}
+              </div>
+            {% endfor %}
+          {% endif %}
+        </td>
+        <td class="wf-synopsis">{{ w.synopsis | escape }}</td>
+      </tr>
     {% endfor %}
-  {% endif %}
-  <script>updateArray("{{tag}}", WfCategory, window.categoryMap)</script>
-{% endfor %}
+  </tbody>
+</table>

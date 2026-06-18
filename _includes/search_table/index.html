@@ -1,16 +1,13 @@
 {% include search_table/config.html %}
-{% include search_table/build.html %}
 
+<div class="wf-search">
+    
+  <div class="wf-toolbar">
+    <h2>Filters</h2>
+    <button id="search-clear" type="button" disabled>Clear filters</button>
+  </div>
 
-Search for a workflow by selecting one or more tags below.
----
-## Filters
-<div id="search-category"></div>
-<script>renderCategory()</script>
----
+  <div id="search-facets"></div>
 
-## Workflows
-<div id="workflow-table"></div>
-
-
-
+  {% include search_table/build.html %}
+</div>
