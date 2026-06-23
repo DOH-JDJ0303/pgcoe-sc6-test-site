@@ -10,4 +10,4 @@ nav_order: 1
 
 ### - Explore the available workflows on the [worfklows page]({{site.baseurl}}/docs/workflows/).
 ### - Interested in [contributing]({{site.baseurl}}/docs/submission/)?
-### - Learn more about this sites [scope, objectives, and limitations]({{site.baseurl}}/docs/about/).
+### - Learn more about this sites [scope, objectives, and limitations]({{site.baseurl}}/docs/about.html).
