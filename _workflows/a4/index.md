@@ -3,14 +3,14 @@ title: Are cases related to each other?
 
 date: "2026-02-10"
 
-status: "under review"
-
 category:
   organism:
     - virus
   application:
     - surveillance
     - outbreak investigation
+  status:
+    - under review
 
 author:
   - name: Pauline Trinh
