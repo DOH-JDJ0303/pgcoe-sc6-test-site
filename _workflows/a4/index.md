@@ -3,6 +3,8 @@ title: Are cases related to each other?
 
 date: "2026-02-10"
 
+status: "under review"
+
 category:
   organism:
     - virus
