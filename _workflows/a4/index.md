@@ -189,9 +189,10 @@ PV337788.1               12          17          15          14           0
 
 The SNP distance matrix tells you how genetically similar or different your sequences are to each other. Each number represents the count of single nucleotide differences between a pair of sequences. Lower numbers mean more closely related sequences, and higher numbers mean more distantly related sequences.
 
-- **Low distances: 0 to 3 SNPs** 
-- **Moderate distance: 7 to 9 SNPs** 
-- **High distance: 18 to 24 SNPs** 
+**For single-segment analyses of influenza viruses:**
+- Low distances: 0 to 3 SNPs 
+- Moderate distance: 7 to 9 SNPs 
+- High distance: 10 or more SNPs 
 
 
 > **Use thresholds with caution:**
